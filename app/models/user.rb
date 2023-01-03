@@ -5,5 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :results
-  field :is_doctor, type: Boolean, default: false
 end
