@@ -1,0 +1,2 @@
+class Infection < ApplicationRecord
+end
