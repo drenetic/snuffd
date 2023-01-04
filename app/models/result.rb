@@ -1,6 +1,7 @@
 class Result < ApplicationRecord
   belongs_to :user
-  belongs_to :doctor, class_name: 'User'
+  belongs_to :doctor, class_name: "User"
   has_many :links, dependent: :destroy
-  has_many :results_infections, dependent: :destroy
+  has_many :results_infections
+  has_many :infections, through: :results_infections
 end
