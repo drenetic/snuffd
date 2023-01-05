@@ -1,0 +1,7 @@
+<h1>Result from <%= @result.test_date %></h1>
+ <% @result.results_infections.each do |infection|  %>
+  <div>
+  You have <%= Infection.find(infection.infection_id).name %>
+  , with a status of <%= infection.status %>
+</div>
+ <% end %>
