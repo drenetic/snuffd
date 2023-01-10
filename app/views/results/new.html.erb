@@ -1,4 +1,6 @@
+<%# require simple-form-datepicker %>
 <%= simple_form_for @result do |f| %>
-  <%= f.association :infections, collection: Infection.all.order(:name), as: :check_boxes %>
+  <%= f.association :infections, label:'Please tick to indicate a new Entry', collection: Infection.all.order(:name), as: :check_boxes %>
+  <%# <%= f.input :test_date, label: "When was this test performed?" :as :datepicker %>
   <%= f.button :submit %>
 <% end %>

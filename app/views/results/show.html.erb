@@ -1,0 +1,11 @@
+<div class="text-center">
+  <h1> Your New Result Details Details </h1>
+</div>
+
+<% result = Result.find(params["id"]) %>
+
+</div class="text-center">
+  <%= result.infection_ids  %>
+  <%= result.test_date.strftime('%d/%b/%Y') %>
+  <%= result.next_test_date.strftime('%d/%b/%Y') %>
+</div>

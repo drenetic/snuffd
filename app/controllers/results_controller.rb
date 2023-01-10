@@ -1,5 +1,4 @@
 class ResultsController < ApplicationController
-# before_action :set_user, only: %i[new create]
 
   def new
     @result = Result.new
@@ -7,17 +6,18 @@ class ResultsController < ApplicationController
 
   def create
     @result = Result.new(results_params)
+    @result.user = current_user
     date = @result.test_date = Date.today
     @result.next_test_date = date + 7
-    raise
+    @result.doctor_id = User.all.where(is_doctor: true).sample.id
     if @result.save
-      params[@result][:infection_ids].each do |infection_id|
-        ResultInfection.Create(
+      params[:result][:infection_ids].each do |infection_id|
+        ResultsInfection.create(
           result: @result,
           infection_id: infection_id
         )
-        redirect_to new_result_path(@result), notice: "Result was successfully created."
       end
+     redirect_to result_path(@result), notice: "Result was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,10 +34,6 @@ class ResultsController < ApplicationController
       infection_ids: []
     )
   end
-
-  # def set_user
-  #   @user_id = current_user
-  # end
 
   def results_infections_params
     params.require(:results_infections).permit(
