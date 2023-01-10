@@ -3,6 +3,7 @@ class ResultsController < ApplicationController
   def show
     result = Result.find(params[:id])
     @result = current_user == result.user ? result : "Access Denied"
+
   end
 
   private
