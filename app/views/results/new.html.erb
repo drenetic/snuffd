@@ -1,0 +1,4 @@
+<%= simple_form_for @result do |f| %>
+  <%= f.association :infections, collection: Infection.all.order(:name), as: :check_boxes %>
+  <%= f.button :submit %>
+<% end %>
