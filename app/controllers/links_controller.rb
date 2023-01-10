@@ -3,7 +3,6 @@ class LinksController < ApplicationController
 
   def index
     @results = Result.all
-    #@results = Result.where(user_id: current_user.id)
     @links = Link.where(result_id: @results.ids)
   end
 
@@ -19,7 +18,6 @@ class LinksController < ApplicationController
         expiration_date: expiration_date
       )
     if link.save
-      #links_path
       render plain: "#{share_results_url}?uuid=#{link.uuid} created"
     else
       render plain: "Link generation failed"
