@@ -4,7 +4,7 @@
 
  <% @result.results_infections.each do |infection|  %>
   <div>
-    <h3><%= Infection.find(infection.infection_id).name %> <%= infection.is_treated ? "👍" : "💊" %></h3>
+    <h3><%= link_to Infection.find(infection.infection_id).name %> <%= infection.is_treated ? "👍" : "💊", %></h3>
   </div>
  <% end %>
 
