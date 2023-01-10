@@ -1,6 +1,6 @@
-<%= @infection.name %>
+<h1><%= @infection.name %></h1>
 
-Status: <%= @result_infection.status %>
-Start Date: <%= @result_infection.start_date.strftime("%d %b %y") %>
-End Date: <%= @result_infection.end_date.strftime("%d %b %y") %>
-Description: <%= @infection.description %>
+<div>Status: <%= @result_infection.status %></div>
+<div>Start Date: <%= @result_infection.start_date.strftime("%d %b %y") %></div>
+<div>End Date: <%= @result_infection.end_date.strftime("%d %b %y") %></div>
+<div>Description: <%= @infection.description %></div>

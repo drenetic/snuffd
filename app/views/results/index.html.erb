@@ -1,0 +1,3 @@
+<% @results.each do |result| %>
+<%= link_to "Result from #{result.test_date.strftime("%d %b %y")}", result_path(result)  %>
+<% end %>
