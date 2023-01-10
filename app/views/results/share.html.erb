@@ -1,0 +1,20 @@
+
+<h1>STI Results for #<%= @result.id %></h1>
+
+<ul>
+  <% if @results_infections.empty? %>
+  <p>No infections have been assigned to this result.</p>
+  <p>Bonk responsibly.</p>
+  <% else %>
+  <% @results_infections.each do |results_infection| %>
+    <li>
+      <%= results_infection.infection.name %>:
+      <%= results_infection.status %>
+      <% if results_infection.is_treated %>
+        (treated)
+      <% end %>
+    </li>
+  <% end %>
+  <% end %>
+  <%= @result.links.last.expiration_date - Time.now %>
+</ul>
