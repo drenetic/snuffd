@@ -1,5 +1,4 @@
 class ResultsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show generate_link]
   before_action :authenticate_link, only: %i[share]
 
   def index
@@ -18,24 +17,6 @@ class ResultsController < ApplicationController
       end
     else
       render plain: "No ID provided"
-    end
-  end
-
-  def generate_link
-    result = Result.find(params[:id])
-    link_uuid = SecureRandom.uuid
-    expiration_date = Time.now + 5.minutes
-    link =
-      Link.new(
-        uuid: link_uuid,
-        result_id: result.id,
-        is_active: true,
-        expiration_date: expiration_date
-      )
-    if link.save
-      render plain: "#{result_share_url}?uuid=#{link.uuid} created"
-    else
-      render plain: "Link generation failed"
     end
   end
 
@@ -66,5 +47,4 @@ class ResultsController < ApplicationController
       render plain: "Invalid link"
     end
   end
-  helper_method :seconds_to_mins
 end

@@ -16,5 +16,5 @@
     </li>
   <% end %>
   <% end %>
-  <%= seconds_to_mins(@result.links.last.expiration_date - Time.now) %>
+  <%= @result.links.last.expiration_date - Time.now %>
 </ul>

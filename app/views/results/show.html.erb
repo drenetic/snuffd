@@ -18,5 +18,5 @@
 
 
 <% if user_signed_in? %>
-  <%= link_to "Generate Link", generate_link_result_path(@result), method: :post %>
+  <%= link_to "Generate Link", result_link_path(@result) %>
 <% end %>
