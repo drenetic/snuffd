@@ -1,3 +1,6 @@
 <% @results.each do |result| %>
 <%= link_to "Result from #{result.test_date.strftime("%d %b %y")}", result_path(result)  %>
 <% end %>
+
+
+<%= button_to "logout", destroy_user_session_path, method: :delete  %>

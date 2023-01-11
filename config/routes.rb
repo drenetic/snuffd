@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users
-  root to: "pages#home"
-
   resources :results, only: %i[show index] do
     resources :results_infections, only: %i[show]
+    collection { get :share }
+    resources :links, only: %i[] do
+      member { get :create }
+    end
   end
+  resources :links, only: %i[index]
+
+  devise_for :users
+  root to: "pages#home"
 
 end

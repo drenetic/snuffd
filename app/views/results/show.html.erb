@@ -9,3 +9,6 @@
  <% end %>
 
 </div>
+<% if user_signed_in? %>
+  <%= link_to "Generate Link", result_link_path(@result) %>
+<% end %>

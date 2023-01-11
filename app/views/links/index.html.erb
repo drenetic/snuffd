@@ -1,0 +1,12 @@
+<h1>Links#show</h1>
+<p>Find me in app/views/links/show.html.erb</p>
+
+<% @links.each do |link| %>
+  <p><b>Link ID </b><%= link.id %></p>
+  <p><b>Link UUID </b><%= link.uuid %></p>
+  <p><b>Link Result </b><%= link.result.id %></p>
+  <p><b>Link User </b><%= link.result.user.nickname %></p>
+  <p><b>Link Status </b><%= link.is_active %></p>
+  <p><b>Link Expiry </b><%= link.expiration_date %></p>
+  <br>
+  <% end %>
