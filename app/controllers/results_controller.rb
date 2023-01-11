@@ -24,12 +24,6 @@ class ResultsController < ApplicationController
 
   private
 
-  def results_params
-    params.require(:result).permit(
-      :user, :doctor, :test_date, :next_test_date
-    )
-  end
-
   def authenticate_link
     link = Link.find_by(uuid: params[:uuid])
     if link

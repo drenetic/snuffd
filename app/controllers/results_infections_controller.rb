@@ -5,5 +5,4 @@ class ResultsInfectionsController < ApplicationController
     @result_infection = ResultsInfection.find(params[:id])
     @infection = Infection.find(@result_infection.infection_id)
   end
-
 end
