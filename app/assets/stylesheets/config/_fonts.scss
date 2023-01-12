@@ -1,9 +1,11 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Bebas+Neue&family=Inter+Tight:wght@900&family=Space+Mono&display=swap');
+
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: "Space Mono", "Courier", "serif";
+$headers-font: "Bebas Neue", "Helvetica", "sans-serif";
+$logo-font: "Inter Tight", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
