@@ -12,14 +12,13 @@
 </head>
 
 <body>
-  <div class="wrapper d-flex align-items-stretch">
     <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
-  </div>
 
-    <div class="container-fluid">
-      <%= yield %>
-    </div>
+  <div class="container ms-1">
+    <%= yield %>
+</div>
+
+    <%= render "shared/flashes" %>
 </body>
 
 </html>
