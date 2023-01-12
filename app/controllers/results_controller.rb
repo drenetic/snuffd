@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
 before_action :authenticate_link, only: %i[share]
+
   def new
     @result = Result.new
   end
