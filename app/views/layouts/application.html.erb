@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Snuffd</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
+<head>
+  <title>Snuffd</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-  <%= render "shared/navbar" %>
-  <%= render "shared/flashes" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+</head>
 
-    <%= yield %>
-  </body>
+<body>
+  <div class="wrapper d-flex align-items-stretch">
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
+  </div>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+</body>
+
 </html>
