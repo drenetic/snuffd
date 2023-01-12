@@ -1,0 +1,22 @@
+<h1>Personal View</h1>
+
+<p><b>User </b><%= @result.user.first_name %></p>
+<p><b>DOB </b><%= @result.user.date_of_birth %></p>
+<p><b>Test Date </b><%= @result.test_date %></p>
+<br>
+
+<% @results_infections.each do |results_infection| %>
+  <p><b>Result ID </b><%= results_infection.result.id %></p>
+  <p><b>Infection </b><%= results_infection.infection.name %></p>
+  <p><b>Description </b><%= results_infection.infection.description %></p>
+  <p><b>Status </b><%= results_infection.status %></p>
+  <p><b>In Treatment </b><%= results_infection.is_treated %></p>
+  <p><b>Treatment Start Date </b><%= results_infection.start_date %></p>
+  <p><b>Expected Treatment End Date </b><%= results_infection.end_date %></p>
+  <br>
+  <% end %>
+
+
+<% if user_signed_in? %>
+  <%= link_to "Generate Link", result_link_path(@result) %>
+<% end %>
