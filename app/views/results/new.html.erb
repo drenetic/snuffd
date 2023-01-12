@@ -2,5 +2,9 @@
 <%= simple_form_for @result do |f| %>
   <%= f.association :infections, label:'Please tick to indicate a new Entry', collection: Infection.all.order(:name), as: :check_boxes %>
   <%# <%= f.input :test_date, label: "When was this test performed?" :as :datepicker %>
-  <%= f.button :submit %>
+  <%= f.input :test_date, label:'When was this test taken?', as: :date %>
+  <%= f.input :next_test_date, label:'When is the followup test due?', as: :date %>
+  <%# <%= f.association :status, collection: [["Detected"], ["Not Detected"]], as: :check_boxes %>
+  <%# <%= f.association :status, :prompt => "Treatment Status?", collection: Snippet::STATUS %>
+  <%= f.button :submit, class:"btn btn-primary" %>
 <% end %>

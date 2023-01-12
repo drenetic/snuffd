@@ -1,5 +1,5 @@
 class ResultsController < ApplicationController
-
+before_action :authenticate_link, only: %i[share]
   def new
     @result = Result.new
   end
@@ -7,8 +7,6 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(results_params)
     @result.user = current_user
-    date = @result.test_date = Date.today
-    @result.next_test_date = date + 7
     @result.doctor_id = User.all.where(is_doctor: true).sample.id
     if @result.save
       params[:result][:infection_ids].each do |infection_id|
@@ -20,7 +18,8 @@ class ResultsController < ApplicationController
      redirect_to result_path(@result), notice: "Result was successfully created."
     else
       render :new, status: :unprocessable_entity
-  before_action :authenticate_link, only: %i[share]
+    end
+  end
 
   def index
     #@results = Result.where(user_id: current_user.id)
@@ -60,8 +59,7 @@ class ResultsController < ApplicationController
       :user_id,
       :doctor_id,
       :test_date,
-      :next_test_date,
-      infection_ids: []
+      :next_test_date
     )
   end
 
@@ -88,5 +86,4 @@ class ResultsController < ApplicationController
       render plain: "Invalid link"
     end
   end
-
 end

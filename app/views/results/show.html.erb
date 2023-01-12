@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="text-center">
   <h1> Your New Result Details Details </h1>
 </div>
@@ -10,7 +9,7 @@
   <%= result.test_date.strftime('%d/%b/%Y') %>
   <%= result.next_test_date.strftime('%d/%b/%Y') %>
 </div>
-=======
+
 <h1>Personal View</h1>
 
 <p><b>User </b><%= @result.user.first_name %></p>
@@ -33,4 +32,3 @@
 <% if user_signed_in? %>
   <%= link_to "Generate Link", result_link_path(@result) %>
 <% end %>
->>>>>>> master
