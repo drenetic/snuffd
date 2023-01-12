@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :results
   has_one_attached :avatar
 
+  validates :nickname, presence: true, uniqueness: true
+
   def article_params
     params.require(:user).permit(avatars: [])
   end

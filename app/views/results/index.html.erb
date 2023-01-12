@@ -1,7 +1,7 @@
 <% @results.each do |result| %>
 
 <div class="card">
-<p><b>Result ID </b><%= result.id %></p>
+<p><b>Result ID </b><%= link_to result.id, result_path(result) %></p>
 <p><b>Patient Name</b><%= result.user.first_name %></p>
 <% result.infections.each do |infection| %>
 <p><li><%= infection.id %> | <%= infection.name %></li></p>
@@ -9,5 +9,6 @@
 <br>
 </div>
 <% end %>
+
 
 <%= button_to "logout", destroy_user_session_path, method: :delete  %>

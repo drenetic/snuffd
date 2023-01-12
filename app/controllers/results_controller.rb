@@ -23,22 +23,12 @@ before_action :authenticate_link, only: %i[share]
   end
 
   def index
-    #@results = Result.where(user_id: current_user.id)
-    @results = Result.all
+    @results = Result.where(user_id: current_user.id)
   end
 
   def show
-    if params[:id]
-      @result = Result.find(params[:id])
-      if @result
-        @results_infections = ResultsInfection.where(result_id: @result.id)
-        render "show"
-      else
-        render plain: "This result doesn't exist."
-      end
-    else
-      render plain: "No ID provided"
-    end
+    result = Result.find(params[:id])
+    @result = current_user == result.user ? result : "Access Denied"
   end
 
   def share
@@ -76,7 +66,6 @@ before_action :authenticate_link, only: %i[share]
 
   def authenticate_link
     link = Link.find_by(uuid: params[:uuid])
-
     if link
       if link.expired?
         link.update(is_active: false)
