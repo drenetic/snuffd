@@ -37,12 +37,12 @@ before_action :authenticate_link, only: %i[share]
 
   def destroy
     @result = Result.find(params[:id])
-    if current_user == result.user
+    if current_user == @result.user
        @result.destroy
+      redirect_to results_path, notice: 'Result was successfully destroyed.'
     else
       render 'errors/access_denied'
     end
-    redirect_to results_path
   end
 
   def share
