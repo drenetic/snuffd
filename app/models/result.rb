@@ -4,6 +4,4 @@ class Result < ApplicationRecord
   has_many :links, dependent: :destroy
   has_many :results_infections
   has_many :infections, through: :results_infections
-
-  
 end
