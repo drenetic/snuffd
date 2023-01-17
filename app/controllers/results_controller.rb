@@ -27,8 +27,22 @@ before_action :authenticate_link, only: %i[share]
   end
 
   def show
-    result = Result.find(params[:id])
-    @result = current_user == result.user ? result : "Access Denied"
+    current_result = Result.find(params[:id])
+    if current_user == current_result.user
+      @result = current_result
+    else
+      render 'errors/access_denied'
+    end
+  end
+
+  def destroy
+    @result = Result.find(params[:id])
+    if current_user == @result.user
+       @result.destroy
+      redirect_to results_path, notice: 'Result was successfully destroyed.'
+    else
+      render 'errors/access_denied'
+    end
   end
 
   def share
