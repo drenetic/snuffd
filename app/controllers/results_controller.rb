@@ -3,19 +3,23 @@ before_action :authenticate_link, only: %i[share]
 
   def new
     @result = Result.new
+    @results_infection = ResultsInfection.new
+  end
+
+  def submit_forms
+    Rails.logger.debug params
   end
 
   def create
+    p "#{params}"
+
     @result = Result.new(results_params)
     @result.user = current_user
     @result.doctor_id = User.all.where(is_doctor: true).sample.id
     if @result.save
-      params[:result][:infection_ids].each do |infection_id|
-        ResultsInfection.create(
-          result: @result,
-          infection_id: infection_id
-        )
-      end
+      @results_infection = @result.results_infections.new(results_infection_params)
+      @results_infection.start_date = @result.test_date
+      @results_infection.save
      redirect_to result_path(@result), notice: "Result was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -58,6 +62,14 @@ before_action :authenticate_link, only: %i[share]
   end
 
   private
+
+  def result_params
+    params.require(:result).permit(:test_date, :next_test_date)
+  end
+
+  def results_infection_params
+    params.require(:results_infection).permit(:infection_id, :status, :is_treated, :result_id)
+  end
 
   def results_params
     params.require(:result).permit(
