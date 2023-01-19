@@ -2,8 +2,7 @@ class ResultsController < ApplicationController
 before_action :authenticate_link, only: %i[share]
 
   def new
-    @result = Result.new
-    @results_infection = ResultsInfection.new
+    @infections = Infection.all
   end
 
   def submit_forms
@@ -13,14 +12,30 @@ before_action :authenticate_link, only: %i[share]
   def create
     p "#{params}"
 
-    @result = Result.new(results_params)
+    @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
     @result.user = current_user
     @result.doctor_id = User.all.where(is_doctor: true).sample.id
     if @result.save
-      @results_infection = @result.results_infections.new(results_infection_params)
-      @results_infection.start_date = @result.test_date
-      @results_infection.save
-     redirect_to result_path(@result), notice: "Result was successfully created."
+      params[:infection_ids].each do |infection_id|
+        results_infection = @result.results_infections.new(infection_id: infection_id)
+
+        params[:status].each do |status|
+          items = status.split(" ")
+          if infection_id == items[1]
+            results_infection.status = items[0]
+          end
+        end
+
+        params[:is_treated].each do |is_treated|
+          items = is_treated.split(" ")
+          if infection_id == items[1]
+            results_infection.is_treated = items[0]
+          end
+        end
+
+        results_infection.save
+      end
+      redirect_to result_path(@result), notice: "Result was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
