@@ -312,13 +312,6 @@ puts "
     )
 end
 
-Result.create!(
-  user_id: User.all.where(is_doctor: false).sample.id,
-  doctor_id: User.all.where(is_doctor: true).sample.id,
-  test_date: test_date.to_s,
-  next_test_date: (test_date + 7).to_s
-)
-
 puts "
   ============================
   ✅ RESULTS data complete.
