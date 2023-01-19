@@ -9,19 +9,25 @@
           <%= f.input :email,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "email" }%>
+                      input_html: { autocomplete: "email" }
+          %>
           <%= f.input :password,
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
+          <%= f.input :nickname,
+                      label: "Username"
+          %>
           <%= f.input :password_confirmation,
                       required: true,
-                      input_html: { autocomplete: "new-password" } %>
+                      input_html: { autocomplete: "new-password" }
+          %>
           <%= f.input :is_doctor,
                       input_html: { type: "checkbox",
                       data: { registration_target: "isProvider", action: "change->registration#checkIsProvider" } },
                       label: "Sign up as a doctor - you will need to enter your provider code",
-                      as: :boolean %>
+                      as: :boolean
+          %>
           <div data-registration-target = "revealProviderNumber">
             <%= f.input :provider_number,
                       input_html: { class: "provider_number" }
