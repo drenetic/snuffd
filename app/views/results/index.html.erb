@@ -11,8 +11,15 @@
 <% end %>
 
 <% @patients.each do |patient| %>
-<div class="card">
-  <p> <li> <%= patient.first_name %> <%= patient.last_name %>  </li> </p>
+  <p>
+    <li>
+     <%= link_to "#{patient.first_name} #{patient.last_name}",
+     patients_result_result(patient) %>
+    </li>
+  </p>
 <% end %>
-</div>
 
+  <%# <li>
+     <%= link_to "#{patient.first_name} #{patient.last_name}",
+     patients_result_result(patient) %>
+  <%# </li> %>

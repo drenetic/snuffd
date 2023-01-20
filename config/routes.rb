@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :links, only: %i[] do
       member { get :create }
     end
+    resources :results do
+      member { get :patients }
+    end
   end
   resources :links, only: %i[index]
 
