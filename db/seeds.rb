@@ -6,10 +6,11 @@ puts "
    Clearing DB.
   ============================
 "
+Result.destroy_all
 User.destroy_all
 Infection.destroy_all
-Result.destroy_all
 ResultsInfection.destroy_all
+Link.destroy_all
 
 puts "
   ============================
