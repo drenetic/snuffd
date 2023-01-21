@@ -75,7 +75,7 @@ adam =
     location: "Melbourne",
     orientation: "Gay",
     password: "123456",
-    is_doctor: false
+    is_doctor: true
   )
 adam.avatar.attach(
   io:
@@ -169,7 +169,7 @@ puts "
   ============================
 "
 
-10.times do |user|
+5.times do |user|
   first_name = Faker::Name.first_name
   user =
     User.create!(
@@ -205,7 +205,7 @@ puts "
   ============================
 "
 
-10.times do |doctor|
+5.times do |doctor|
   first_name = Faker::Name.first_name
   doctor =
     User.create!(

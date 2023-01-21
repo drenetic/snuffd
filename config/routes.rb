@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :results, only: %i[index new create show destroy] do
     resources :results_infections, only: %i[show]
+    member { get :confirmation }
     collection { get :share }
     resources :links, only: %i[] do
       member { get :create }
