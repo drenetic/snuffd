@@ -1,40 +1,97 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <%= link_to "SNUFFD", root_path, class: "navbar-brand logo" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <%= link_to "My Results", results_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Links", links_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "About", results_path, class: "nav-link" %>
-        </li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
 
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "Hi, #{current_user.nickname}", results_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
-        </li>
+      <% if user_signed_in? && current_user.is_doctor == true %>
+      <div class="row">
+        <div class="col me-5">
+          <%= link_to "SNUFFD", root_path, class: "navbar-brand logo" %>
+          <div class="md-2 text-white"><i>for</i> HEALTH PROFESSIONALS</div>
+        </div>
+      </div>
+      <% else %>
+      <div class="row">
+        <div class="col me-5">
+          <%= link_to "SNUFFD", root_path, class: "navbar-brand logo" %>
+        </div>
+      </div>
+      <% end %>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <div class="progress-container">
+          <div class="progress-bar" id="myBar">
+          </div>
+        </div>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav align-items-lg-center">
+          <% if user_signed_in? %>
+          <% if current_user.is_doctor == true %>
+
+          <%= link_to "New Patient", new_result_path, class: "nav-link text-nowrap" %>
+          <%= link_to "My Patients", results_path, class: "nav-link text-nowrap" %>
+        </div>
+
         <% else %>
-        <li class="nav-item">
-          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-        <% end %>
-      </ul>
+
+        <%= link_to "My Results", results_path, class: "nav-link text-nowrap" %>
+        <%= link_to "My Links", links_path, class: "nav-link text-nowrap" %>
+      </div>
+
+      <% end %>
+
+      <% else %>
 
     </div>
-  </div>
-</nav>
+
+    <% end %>
+
+
+    <div class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+
+      <% if user_signed_in? %>
+      <div class="nav-item dropdown">
+
+        <% if current_user.is_doctor == true %>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <%= "👋 Hi, Dr. #{current_user.nickname}" %>
+        </a>
+
+        <% else %>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <%= "👋 Hi, #{current_user.nickname}" %>
+        </a>
+
+        <% end %>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <%= link_to "Edit profile", edit_user_registration_path, class: "dropdown-item " %>
+        </div>
+      </div>
+
+
+      <div class="nav-item mx-2">
+        <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+
+    <% else %>
+    <div class="nav-item">
+      <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+    </div>
+    <div class="nav-item">
+      <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+    </div>
+
+    <% end %>
+    <div class="border-container">
+      <div class="border-bar" id="myBar">
+      </div>
+    </div>
+      <% flash.each do |type, msg| %>
+  <div class="alert"><%= msg %></div>
+  <% end %>
+  </nav>
