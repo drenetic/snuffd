@@ -2,21 +2,40 @@ class ResultsController < ApplicationController
 before_action :authenticate_link, only: %i[share]
 
   def new
-    @result = Result.new
+    @infections = Infection.all
+  end
+
+  def submit_forms
+    Rails.logger.debug params
   end
 
   def create
-    @result = Result.new(results_params)
+    p "#{params}"
+
+    @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
     @result.user = current_user
     @result.doctor_id = User.all.where(is_doctor: true).sample.id
     if @result.save
-      params[:result][:infection_ids].each do |infection_id|
-        ResultsInfection.create(
-          result: @result,
-          infection_id: infection_id
-        )
+      params[:infection_ids].each do |infection_id|
+        results_infection = @result.results_infections.new(infection_id: infection_id)
+
+        params[:status].each do |status|
+          items = status.split(" ")
+          if infection_id == items[1]
+            results_infection.status = items[0]
+          end
+        end
+
+        params[:is_treated].each do |is_treated|
+          items = is_treated.split(" ")
+          if infection_id == items[1]
+            results_infection.is_treated = items[0]
+          end
+        end
+
+        results_infection.save
       end
-     redirect_to result_path(@result), notice: "Result was successfully created."
+      redirect_to result_path(@result), notice: "Result was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -68,21 +87,17 @@ before_action :authenticate_link, only: %i[share]
 
   private
 
-  def results_params
-    params.require(:result).permit(
-      :user_id,
-      :doctor_id,
-      :test_date,
-      :next_test_date
-    )
+  def result_params
+    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id,)
   end
 
   def results_infections_params
     params.require(:results_infections).permit(
-     :user_id,
+     :infection_id,
      :result_id,
      :status,
      :start_date,
+     :is_treated,
      :end_date
     )
   end
