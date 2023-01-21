@@ -79,28 +79,16 @@ before_action :authenticate_link, only: %i[share]
   private
 
   def result_params
-    params.require(:result).permit(:test_date, :next_test_date)
-  end
-
-  def results_infection_params
-    params.require(:results_infection).permit(:infection_id, :status, :is_treated, :result_id)
-  end
-
-  def results_params
-    params.require(:result).permit(
-      :user_id,
-      :doctor_id,
-      :test_date,
-      :next_test_date
-    )
+    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id,)
   end
 
   def results_infections_params
     params.require(:results_infections).permit(
-     :user_id,
+     :infection_id,
      :result_id,
      :status,
      :start_date,
+     :is_treated,
      :end_date
     )
   end
