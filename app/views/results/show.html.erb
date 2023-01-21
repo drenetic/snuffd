@@ -1,31 +1,27 @@
 <div class="container">
-  <div class="card-body text-center">
-    <div class="text-center">
-    <h2>Results from <%= @result.test_date.strftime("%d %b %y") %></h2>
-    </div>
-
-    <% result = Result.find(params["id"]) %>
-
-
-
-    <h1>Personal View</h1>
-
-    <p><b>User: </b><%= @result.user.first_name %></p>
-    <p><b>DOB: </b><%= @result.user.date_of_birth %></p>
-    <p><b>Test Date: </b><%= @result.test_date %></p>
-    <br>
-
-    <div>
-    <% @result.results_infections.each do |results_infection|  %>
-      <div>
-        <h3><%= link_to Infection.find(results_infection.infection_id).name, result_results_infection_path(@result,results_infection) %> <%= results_infection.is_treated ? "👍" : "💊"%></h3>
-      </div>
-    <% end %>
-    </div>
-
-    <% if user_signed_in? %>
-      <%= link_to "Generate Link", result_link_path(@result) %>
-      <%= link_to "Delete this result!", result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-    <% end %>
+  <div class="container">
+  <h1>Personal View</h1>
   </div>
+    <div class= "card-detail">
+      <div class="card">
+        <h2>Results from <%= @result.test_date.strftime("%d %b %y") %></h2>
+        <% result = Result.find(params["id"]) %>
+
+        <p><b>User: </b><%= @result.user.first_name %></p>
+        <p><b>DOB: </b><%= @result.user.date_of_birth %></p>
+        <p><b>Test Date: </b><%= @result.test_date %></p>
+        <br>
+        <div>
+        <% @result.results_infections.each do |results_infection|  %>
+          <div>
+            <h3><%= link_to Infection.find(results_infection.infection_id).name, result_results_infection_path(@result,results_infection) %> <%= results_infection.is_treated ? "👍" : "💊"%></h3>
+          </div>
+        <% end %>
+        </div>
+        <% if user_signed_in? %>
+          <%= link_to "Generate Link", result_link_path(@result) %>
+          <%= link_to "Delete this result!", result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+    </div>
 </div>

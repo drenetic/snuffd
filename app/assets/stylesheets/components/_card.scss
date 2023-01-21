@@ -21,3 +21,16 @@
   text-decoration: none;
   color:black;
 }
+
+.card-detail {
+  height:fit-content;
+  max-width: 350px;
+  display:block;
+  justify-content: center;
+  padding: 0rem;
+  margin-bottom: 1rem;
+  font-size:$font-size-base;
+  border-radius: 1px;
+  border-width: 1px;
+  border-color:#DDD;
+}
