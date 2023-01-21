@@ -1,0 +1,8 @@
+<h2> <%= "Results for #{@patient.first_name} #{@patient.last_name}" %> </h2>
+<% @results.each do |result| %>
+<p>
+  <li>
+    <%= link_to "#{result.id} #{result.test_date}", result_path(result) %>
+  </li>
+ </p>
+<% end %>

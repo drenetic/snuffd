@@ -1,11 +1,57 @@
+<% if current_user.is_doctor %>
+<input type="text" id="search-input" placeholder="Patient Search...">
+<div id="patient-list">
+  <% @patients.each do |patient| %>
+    <p>
+      <li>
+        <%= link_to "#{patient.first_name} #{patient.last_name}", patients_result_path(patient) %>
+      </li>
+    </p>
+  <% end %>
+</div>
+
+<% else %>
+
 <% @results.each do |result| %>
 
 <div class="card">
-<p><b>Result ID </b><%= link_to result.id, result_path(result) %></p>
-<p><b>Patient Name</b><%= result.user.first_name %></p>
+<p>
+  <b>Result ID </b>
+    <%= link_to result.id, result_path(result) %>
+</p>
+<p>
+  <b>Patient Name</b>
+   <%= result.user.first_name %>
+</p>
 <% result.infections.each do |infection| %>
-<p><li><%= infection.id %> | <%= infection.name %></li></p>
+<p>
+  <li>
+    <%= infection.id %> | <%= infection.name %>
+  </li>
+</p>
 <% end %>
 <br>
 </div>
 <% end %>
+<% end %>
+
+<script>
+  let searchInput;
+  searchInput = document.getElementById("search-input");
+  let list = document.getElementById("patient-list");
+
+  searchInput.addEventListener("keyup", function() {
+    let searchValue = this.value.toLowerCase();
+    let listItems = list.getElementsByTagName("li");
+
+    for (let i = 0; i < listItems.length; i++) {
+      let item = listItems[i];
+      let itemValue = item.innerHTML.toLowerCase();
+      if (itemValue.indexOf(searchValue) != -1) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    }
+  });
+</script>
