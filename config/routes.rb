@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
   resources :links, only: %i[index]
+  resources :results_infections, only: %i[show new create]
+
 
   devise_for :users
   root to: "pages#home"
