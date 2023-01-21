@@ -25,11 +25,12 @@ before_action :authenticate_link, only: %i[share]
     # The below needs to change where the doctor_id is the current user and the special code links doctor and patient
     @result.user = current_user
     #####################################
-    @result.doctor = current_user # only a doctor can create a result
+    @result.doctor = current_user
     if @result.save
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
         results_infection.start_date = @result.test_date
+        results_infection.end_date = results_infection.start_date + Infection.find(infection_id.to_i).duration.days
         params[:status].each do |status|
           items = status.split(" ")
           if infection_id == items[1]
