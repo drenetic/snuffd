@@ -2,7 +2,7 @@
 <% @results.each do |result| %>
 <p>
   <li>
-    <%= link_to "#{result.test_date}", result_path(result) %>
+    <%= link_to "#{result.id} #{result.test_date}", result_path(result) %>
   </li>
  </p>
 <% end %>

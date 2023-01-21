@@ -1,3 +1,5 @@
+console.log("Search Controller Connected");
+
 let searchInput = document.getElementById("search-input");
 let list = document.getElementById("patient-list");
 
