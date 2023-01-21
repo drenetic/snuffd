@@ -54,7 +54,17 @@ before_action :authenticate_link, only: %i[share]
   end
 
   def index
-    @results = Result.where(user_id: current_user.id)
+    if current_user.is_doctor == true
+      @results = Result.where(doctor_id: current_user)
+      @patients = @results.map { |result| User.find_by_id(result.user_id) }.uniq
+    else
+      @results = Result.where(user_id: current_user.id)
+    end
+  end
+
+  def patients
+    @results = Result.where(user_id: params[:id], doctor_id: current_user)
+    @patient = User.find(params[:id])
   end
 
   def show
