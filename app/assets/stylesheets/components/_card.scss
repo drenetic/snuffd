@@ -1,15 +1,40 @@
-
 .card {
-  background-size: cover;
-  background-position: center;
-  height: 180px;
-  display: flex;
+  height:fit-content;
+  max-width: 350px;
+  display:block;
   justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size:$font-size-base;
+  border-radius: 15px;
+  border-width: 1px;
+  border-color:#DDD;
+  //box-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+.card-header {
+  font-size: 30px;
+  border-color: white;
+  background-color: white;
+}
+
+.no-underline {
+  text-decoration: none;
+  color:black;
+}
+
+.card-detail {
+  height:fit-content;
+  max-width: 350px;
+  display:block;
+  justify-content: center;
+  padding: 0rem;
+  margin-bottom: 1rem;
+  font-size:$font-size-base;
+  border-radius: 1px;
+  border-width: 1px;
+  border-color:#DDD;
+}
+
+.btn {
+  margin-bottom: 1rem;
 }
