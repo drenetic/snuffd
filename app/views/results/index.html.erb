@@ -1,4 +1,5 @@
 <% if current_user.is_doctor %>
+
   <input type="text" id="search-input" placeholder="Patient Search...">
   <div id="patient-list">
     <% @patients.each do |patient| %>
@@ -12,15 +13,8 @@
 
 <% else %>
 
-
   <div class="container">
     <% @results.each do |result| %>
-    <div class="container">
-    <h1>Good Morning</h1>
-    <p style="color: gray"><%= Date.today %></p>
-    </div>
-
-
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
