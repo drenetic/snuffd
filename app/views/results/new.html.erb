@@ -1,4 +1,5 @@
-<%= form_tag('/results', method: "post", html: { id: "results-form" }) do %>
+<%= form_tag('/results', method: "post", html: { id: "results-form" },
+  data: { turbo: :false, controller: 'results' } ) do %>
   <%= label_tag(:test_date, "When was this test taken?") %>
   <%= date_field_tag(:test_date, nil , required: true) %><br>
   <%= label_tag(:next_test_date, "When is the followup test due?") %>
@@ -6,8 +7,11 @@
   <p>Select the infections that were tested?</p>
   <% @infections.each do |infection| %>
   <br>
-    <%= check_box_tag("infection_ids[]", infection.id) %> <%= infection.name %><br>
-    <%= label_tag(:status, "What was the result?") %> <br>
+    <%= check_box_tag(:"infection_ids[]", infection.id, false,
+    { data: { results_target: "#{infection.name.downcase}Target",
+    action: "change->results#reveal#{infection.name.downcase}Results" } }) %>
+    <%= infection.name %> <br>
+    <%= label_tag(:status, "What was the result?",{ data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> <br>
     <%= check_box_tag("status[]", "positve #{infection.id}") %> Positive <br>
     <%= check_box_tag("status[]", "negative #{infection.id}") %> Negative <br>
     <%= label_tag(:is_treated, "Has treatment begun?") %> <br>
@@ -17,3 +21,7 @@
   <br>
   <%= submit_tag("Submit") %>
 <% end %>
+
+<%# # html: { target: "#{infection.name.downcase}Target",
+#       action: "change->results#reveal#{infection.name.downcase}Results" },
+#       checked: false) %>
