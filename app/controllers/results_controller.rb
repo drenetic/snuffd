@@ -54,17 +54,17 @@ before_action :authenticate_link, only: %i[share]
   end
 
   def index
-    if current_user.is_doctor == true
-      @results = Result.where(doctor_id: current_user)
+    if current_user.is_doctor
+      @results = Result.where(doctor_id: current_user.id)
       @patients = @results.map { |result| User.find_by_id(result.user_id) }.uniq
     else
       @results = Result.where(user_id: current_user.id)
     end
   end
 
-  def patients
-    @results = Result.where(user_id: params[:id], doctor_id: current_user)
-    @patient = User.find(params[:id])
+  def patient
+    @patient = User.find(params[:patient_id])
+    @results = Result.where(user_id: params[:patient_id], doctor_id: current_user)
   end
 
   def show
@@ -80,7 +80,7 @@ before_action :authenticate_link, only: %i[share]
     @result = Result.find(params[:id])
     if current_user == @result.user || current_user == @result.doctor
       @result.destroy
-        if current_user == @result.use
+        if current_user == @result.user
           redirect_to results_path, notice: 'Result was successfully destroyed.'
         elsif current_user == @result.doctor
           # redirect to the current patients results

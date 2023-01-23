@@ -6,10 +6,12 @@ Rails.application.routes.draw do
     resources :links, only: %i[] do
       member { get :create }
     end
-    member { get :patients }
   end
+
   resources :links, only: %i[index]
   resources :results_infections, only: %i[ new create]
+
+  get '/results/patient/:patient_id', to: 'results#patient', as: 'results_patient'
 
   devise_for :users
   root to: "pages#home"
