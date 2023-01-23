@@ -1,25 +1,88 @@
-<h2>Sign up</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+<div class="container">
+  <h2 class="test_red">Sign up</h2>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-4">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),
+      data: { turbo: :false, controller: 'registration' } ) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      label: "First Name?"
+          %>
+          <%= f.input :last_name,
+                      required: true,
+                      autofocus: true,
+                      label: "Family Name?"
+          %>
+          <%= f.input :nickname,
+                      label: "Username"
+          %>
+          <%= f.input :date_of_birth,
+                      as: :date
+          %>
+          <%= f.input :gender,
+                      as: :select, collection: ["Man",
+                                                "Cis Man",
+                                                "Trans Man",
+                                                "Woman",
+                                                "Cis Woman",
+                                                "Trans Woman",
+                                                "Non-binary",
+                                                "Non-conforming",
+                                                "Prefer to not say",
+                                                "Other identity"]
+          %>
+          <%= f.input :orientation,
+                      as: :select, collection: ["Straight (heterosexual)",
+                                                "Gay",
+                                                "Lesbian",
+                                                "Bisexual",
+                                                "Asexual",
+                                                "Unsure",
+                                                "Prefer to not say",
+                                                "Other preference"]
+          %>
+          <%= f.input :location,
+                      as: :select, collection: ["NSW", "VIC", "QLD", "SA", "WA", "NT"],
+                      label: "Residing State"
+          %>
+          <%= f.input :email,
+                      required: true,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }
+          %>
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" }
+          %>
+          <%= f.input :is_doctor,
+                      input_html: { type: "checkbox",
+                      data: { registration_target: "isProvider", action: "change->registration#checkIsProvider" } },
+                      label: "Sign up as a doctor - you will need to enter your provider code",
+                      as: :boolean
+          %>
+          <div data-registration-target = "revealProviderNumber">
+            <%= f.input :provider_number,
+                      input_html: { class: "provider_number" }
+            %>
+          </div>
+        </div>
+        <div class="form-actions">
+           <%= f.button :submit, "Sign up" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
+</div>
 
 <%= render "devise/shared/links" %>
+
+
+ <%= link_to "Login", new_user_session_path %>
+ <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>

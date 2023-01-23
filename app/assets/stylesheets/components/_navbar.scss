@@ -10,3 +10,19 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.border-container {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #ff2bdf;
+}
+
+/* The progress bar (scroll indicator) */
+.border-bar {
+  height: 0.25rem;
+  background: #f12545;
+  width: 0%;
+}
