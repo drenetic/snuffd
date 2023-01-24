@@ -3,11 +3,21 @@ before_action :authenticate_link, only: %i[share]
 before_action :validate_secure_code, only: %i[create]
 
   def new
-    @infections = Infection.all
+    if current_user.is_doctor
+      @infections = Infection.all
+    else
+      render 'errors/access_denied'
+    end
   end
 
-  def submit_forms
-    Rails.logger.debug params
+  def confirmation
+    current_result = Result.find(params[:id])
+    if current_user == current_result.user || current_user == current_result.doctor
+      @result = current_result
+      @result_infections = ResultsInfection.where(result: @result)
+    else
+      render 'errors/access_denied'
+    end
   end
 
   def create
@@ -19,7 +29,8 @@ before_action :validate_secure_code, only: %i[create]
     if @result.save && !@infections.nil?
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
-
+        results_infection.start_date = @result.test_date
+        results_infection.end_date = results_infection.start_date + Infection.find(infection_id.to_i).duration.days
         params[:status].each do |status|
           items = status.split(" ")
           if infection_id == items[1]
@@ -36,24 +47,24 @@ before_action :validate_secure_code, only: %i[create]
 
         results_infection.save
       end
-      redirect_to result_path(@result), notice: "Result was successfully created."
+      redirect_to confirmation_result_path(@result)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def index
-    if current_user.is_doctor == true
-      @results = Result.where(doctor_id: current_user)
+    if current_user.is_doctor
+      @results = Result.where(doctor_id: current_user.id)
       @patients = @results.map { |result| User.find_by_id(result.user_id) }.uniq
     else
       @results = Result.where(user_id: current_user.id)
     end
   end
 
-  def patients
-    @results = Result.where(user_id: params[:id], doctor_id: current_user)
-    @patient = User.find(params[:id])
+  def patient
+    @patient = User.find(params[:patient_id])
+    @results = Result.where(user_id: params[:patient_id], doctor_id: current_user)
   end
 
   def show
@@ -67,9 +78,13 @@ before_action :validate_secure_code, only: %i[create]
 
   def destroy
     @result = Result.find(params[:id])
-    if current_user == @result.user
+    if current_user == @result.user || current_user == @result.doctor
       @result.destroy
-      redirect_to results_path, notice: 'Result was successfully destroyed.'
+        if current_user == @result.user
+          redirect_to results_path, notice: 'Result was successfully destroyed.'
+        elsif current_user == @result.doctor
+          # redirect to the current patients results
+        end
     else
       render 'errors/access_denied'
     end

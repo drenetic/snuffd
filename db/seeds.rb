@@ -75,7 +75,7 @@ adam =
     location: "Melbourne",
     orientation: "Gay",
     password: "123456",
-    is_doctor: false
+    is_doctor: true
   )
 adam.avatar.attach(
   io:
@@ -169,7 +169,7 @@ puts "
   ============================
 "
 
-10.times do |user|
+3.times do |user|
   first_name = Faker::Name.first_name
   user =
     User.create!(
@@ -205,7 +205,7 @@ puts "
   ============================
 "
 
-10.times do |doctor|
+3.times do |doctor|
   first_name = Faker::Name.first_name
   doctor =
     User.create!(
@@ -245,7 +245,8 @@ gono =
     {
       name: "Gonorrhoea",
       description:
-        "Gonorrhea is an STD that can cause infection in the genitals, rectum, and throat. It is very common, especially among young people ages 15-24 years."
+        "Gonorrhea is an STD that can cause infection in the genitals, rectum, and throat. It is very common, especially among young people ages 15-24 years.",
+      duration: 7
     }
   )
 chlam =
@@ -253,7 +254,8 @@ chlam =
     {
       name: "Chlamydia",
       description:
-        "Chlamydia is a common STD that can cause infection among both men and women. It can cause permanent damage to a woman's reproductive system. This can make it difficult or impossible to get pregnant later."
+        "Chlamydia is a common STD that can cause infection among both men and women. It can cause permanent damage to a woman's reproductive system. This can make it difficult or impossible to get pregnant later.",
+      duration: 7
     }
   )
 hepb =
@@ -261,7 +263,8 @@ hepb =
     {
       name: "Hepatitis B",
       description:
-        "Hepatitis B is a vaccine-preventable liver infection caused by the hepatitis B virus (HBV). Hepatitis B is spread when blood, semen, or other body fluids from a person infected with the virus enters the body of someone who is not infected."
+        "Hepatitis B is a vaccine-preventable liver infection caused by the hepatitis B virus (HBV). Hepatitis B is spread when blood, semen, or other body fluids from a person infected with the virus enters the body of someone who is not infected.",
+      duration: 183
     }
   )
 hepc =
@@ -269,7 +272,8 @@ hepc =
     {
       name: "Hepatitis C",
       description:
-        "Hepatitis C is a liver infection caused by the hepatitis C virus (HCV). Hepatitis C is spread through contact with blood from an infected person. Today, most people become infected with the hepatitis C virus by sharing needles or other equipment used to prepare and inject drugs."
+        "Hepatitis C is a liver infection caused by the hepatitis C virus (HCV). Hepatitis C is spread through contact with blood from an infected person. Today, most people become infected with the hepatitis C virus by sharing needles or other equipment used to prepare and inject drugs.",
+      duration: 183
     }
   )
 syph =
@@ -277,7 +281,8 @@ syph =
     {
       name: "Syphilis",
       description:
-        "Syphilis is a sexually transmitted disease (STD) caused by the bacterium Treponema pallidum. Syphilis can cause serious health effects without adequate treatment."
+        "Syphilis is a sexually transmitted disease (STD) caused by the bacterium Treponema pallidum. Syphilis can cause serious health effects without adequate treatment.",
+      duration: 21
     }
   )
 hiv =
@@ -285,7 +290,8 @@ hiv =
     {
       name: "HIV",
       description:
-        "HIV (human immunodeficiency virus) is a virus that attacks the body’s immune system. If HIV is not treated, it can lead to AIDS (acquired immunodeficiency syndrome)."
+        "HIV (human immunodeficiency virus) is a virus that attacks the body’s immune system. If HIV is not treated, it can lead to AIDS (acquired immunodeficiency syndrome).",
+      duration: 0
     }
   )
 

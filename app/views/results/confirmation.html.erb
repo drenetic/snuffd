@@ -1,0 +1,30 @@
+
+<div class="text-center">
+  <h2>Result from <%= @result.test_date.strftime("%d %b %y") %></h2>
+</div>
+
+
+
+<h1>Confirmation View</h1>
+
+<p><b>User: </b><%= @result.user.first_name %></p>
+<p><b>DOB: </b><%= @result.user.date_of_birth.strftime("%d %b %y") %></p>
+<p><b>Test Date: </b><%= @result.test_date.strftime("%d %b %y") %></p>
+<p><b>Next Test Date: </b><%= @result.next_test_date.strftime("%d %b %y") %></p>
+<br>
+
+<div>
+ <% @result.results_infections.each do |results_infection|  %>
+  <div>
+    <h3><%= results_infection.infection.name  %></h3>
+    <p>Status: <%= results_infection.status  %></p>
+    <p>Is currently <%= results_infection.is_treated ? "" : "not" %> being treated.</p>
+  </div>
+ <% end %>
+</div>
+
+<% if user_signed_in? && current_user.is_doctor %>
+  <%# The confirm result should go to view all of the current patients results %>
+  <%= link_to "Confirm Result", result_path(@result) %>
+  <%= link_to "Delete", result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<% end %>
