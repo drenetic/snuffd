@@ -57,13 +57,13 @@
         <% if current_user.is_doctor == true %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, Dr. #{current_user.nickname}" %>
+          <%= "👋 Hi, Dr. #{current_user.nickname} (#{current_user.secure_code})" %>
         </a>
 
         <% else %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, #{current_user.nickname}" %>
+          <%= "👋 Hi, #{current_user.nickname} (#{current_user.secure_code})" %>
         </a>
 
         <% end %>
@@ -91,7 +91,4 @@
       <div class="border-bar" id="myBar">
       </div>
     </div>
-      <% flash.each do |type, msg| %>
-  <div class="alert"><%= msg %></div>
-  <% end %>
   </nav>

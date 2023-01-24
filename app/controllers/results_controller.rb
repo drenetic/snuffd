@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
 before_action :authenticate_link, only: %i[share]
+before_action :validate_secure_code, only: %i[create]
 
   def new
     @infections = Infection.all
@@ -11,11 +12,11 @@ before_action :authenticate_link, only: %i[share]
 
   def create
     p "#{params}"
-
+    @infections = Infection.all
     @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
-    @result.user = current_user
-    @result.doctor_id = User.all.where(is_doctor: true).sample.id
-    if @result.save
+    @result.user_id = @patient.id
+    @result.doctor_id = @doctor.id
+    if @result.save && !@infections.nil?
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
 
@@ -79,7 +80,7 @@ before_action :authenticate_link, only: %i[share]
   private
 
   def result_params
-    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id,)
+    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id, :date_of_birth)
   end
 
   def results_infections_params
@@ -105,4 +106,18 @@ before_action :authenticate_link, only: %i[share]
       render plain: "Invalid link"
     end
   end
+
+  def validate_secure_code
+    secure_code = params[:secure_code]
+    date_of_birth = params[:date_of_birth]
+    @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
+    @doctor = current_user
+    if @patient.nil? || @patient.secure_code_expired?
+      redirect_to new_result_path, notice: "Patient association is invalid."
+    else
+      # @patient.generate_secure_code
+      @patient.save
+    end
+  end
+
 end
