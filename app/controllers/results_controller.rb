@@ -43,12 +43,22 @@ before_action :validate_secure_code, only: %i[create]
   end
 
   def index
-    @results = Result.where(user_id: current_user.id)
+    if current_user.is_doctor == true
+      @results = Result.where(doctor_id: current_user)
+      @patients = @results.map { |result| User.find_by_id(result.user_id) }.uniq
+    else
+      @results = Result.where(user_id: current_user.id)
+    end
+  end
+
+  def patients
+    @results = Result.where(user_id: params[:id], doctor_id: current_user)
+    @patient = User.find(params[:id])
   end
 
   def show
     current_result = Result.find(params[:id])
-    if current_user == current_result.user
+    if current_user == current_result.user || current_user == current_result.doctor
       @result = current_result
     else
       render 'errors/access_denied'
@@ -58,7 +68,7 @@ before_action :validate_secure_code, only: %i[create]
   def destroy
     @result = Result.find(params[:id])
     if current_user == @result.user
-       @result.destroy
+      @result.destroy
       redirect_to results_path, notice: 'Result was successfully destroyed.'
     else
       render 'errors/access_denied'

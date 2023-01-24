@@ -6,6 +6,48 @@
       data: { turbo: :false, controller: 'registration' } ) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">
+          <%= f.input :first_name,
+                      required: true,
+                      autofocus: true,
+                      label: "First Name?"
+          %>
+          <%= f.input :last_name,
+                      required: true,
+                      autofocus: true,
+                      label: "Family Name?"
+          %>
+          <%= f.input :nickname,
+                      label: "Username"
+          %>
+          <%= f.input :date_of_birth,
+                      as: :date
+          %>
+          <%= f.input :gender,
+                      as: :select, collection: ["Man",
+                                                "Cis Man",
+                                                "Trans Man",
+                                                "Woman",
+                                                "Cis Woman",
+                                                "Trans Woman",
+                                                "Non-binary",
+                                                "Non-conforming",
+                                                "Prefer to not say",
+                                                "Other identity"]
+          %>
+          <%= f.input :orientation,
+                      as: :select, collection: ["Straight (heterosexual)",
+                                                "Gay",
+                                                "Lesbian",
+                                                "Bisexual",
+                                                "Asexual",
+                                                "Unsure",
+                                                "Prefer to not say",
+                                                "Other preference"]
+          %>
+          <%= f.input :location,
+                      as: :select, collection: ["NSW", "VIC", "QLD", "SA", "WA", "NT"],
+                      label: "Residing State"
+          %>
           <%= f.input :email,
                       required: true,
                       autofocus: true,
@@ -15,9 +57,6 @@
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
-          <%= f.input :nickname,
-                      label: "Username"
-          %>
           <%= f.input :password_confirmation,
                       required: true,
                       input_html: { autocomplete: "new-password" }
