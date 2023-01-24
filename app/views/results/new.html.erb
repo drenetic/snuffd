@@ -12,16 +12,12 @@
     action: "change->results#reveal#{infection.name.downcase}Results" } }) %>
     <%= infection.name %> <br>
     <%= label_tag(:status, "What was the result?",{ data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> <br>
-    <%= check_box_tag("status[]", "positve #{infection.id}") %> Positive <br>
-    <%= check_box_tag("status[]", "negative #{infection.id}") %> Negative <br>
-    <%= label_tag(:is_treated, "Has treatment begun?") %> <br>
-    <%= check_box_tag("is_treated[]", "true #{infection.id}") %> Yes <br>
-    <%= check_box_tag("is_treated[]", "false #{infection.id}") %> No <br>
+    <%= check_box_tag("status[]", "positve #{infection.id}", false, { data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> Positive <br>
+    <%= check_box_tag("status[]", "negative #{infection.id}", false, { data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> Negative <br>
+    <%= label_tag(:is_treated, "Has treatment begun?",{ data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> <br>
+    <%= check_box_tag("is_treated[]", "true #{infection.id}", false, { data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> Yes <br>
+    <%= check_box_tag("is_treated[]", "false #{infection.id}", false, { data: { results_target: "reveal#{infection.name.downcase}Results" }}) %> No <br>
   <% end %>
   <br>
   <%= submit_tag("Submit") %>
 <% end %>
-
-<%# # html: { target: "#{infection.name.downcase}Target",
-#       action: "change->results#reveal#{infection.name.downcase}Results" },
-#       checked: false) %>
