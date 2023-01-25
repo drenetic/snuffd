@@ -21,7 +21,6 @@ before_action :validate_secure_code, only: %i[create]
   end
 
   def create
-    p "#{params}"
     @infections = Infection.all
     @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
     @result.user_id = @patient.id
