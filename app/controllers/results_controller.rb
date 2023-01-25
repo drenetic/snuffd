@@ -101,6 +101,20 @@ before_action :validate_secure_code, only: %i[create]
     end
   end
 
+  def validate
+    secure_code = params[:secure_code]
+    date_of_birth = params[:date_of_birth]
+    @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
+    @doctor = current_user
+    if @patient.nil? || @patient.secure_code_expired?
+      redirect_to new_result_path, notice: "Patient association is invalid."
+    else
+      # @patient.generate_secure_code
+      # @patient.save
+      render json: @patient
+    end
+  end
+
   private
 
   def result_params
@@ -143,5 +157,6 @@ before_action :validate_secure_code, only: %i[create]
       @patient.save
     end
   end
+
 
 end

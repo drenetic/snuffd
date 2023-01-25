@@ -2,15 +2,18 @@ document.getElementById("results-form").addEventListener("submit", function(even
   event.preventDefault(); // prevent form submission
   const secureCode = document.getElementById("secure_code").value;
   const dateOfBirth = document.getElementById("date_of_birth").value;
+  const csrf_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   // Send an HTTP request to your server to validate the secure code and date of birth
-  fetch('/validate_secure_code', {
+  fetch('/results/validate', {
     method: 'POST',
-    body: JSON.stringify({ secure_code: secureCode, date_of_birth: dateOfBirth }),
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',
+    'X-CSRF-Token': csrf_token },
+    body: JSON.stringify({ secure_code: secureCode, date_of_birth: dateOfBirth })
   })
   .then(response => response.json())
   .then(data => {
-    if (data.valid) {
+    console.log(data)
+    if (typeof data.id === 'number' && data.id >= 0) {
       // Secure code is valid, proceed with form submission
       document.getElementById("main_form").classList.remove("hidden");
       document.getElementById("secure_form").classList.add("hidden");

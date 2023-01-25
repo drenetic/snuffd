@@ -94,7 +94,7 @@ reuben =
     email: "reuben@example.com",
     nickname: "Reubs",
     gender: "Man",
-    date_of_birth: "1988-06-12",
+    date_of_birth: "2008-12-12",
     location: "Melbourne",
     orientation: "Straight (heterosexual)",
     password: "123456",
