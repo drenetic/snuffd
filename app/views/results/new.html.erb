@@ -1,30 +1,19 @@
-<form id="results-form" method="post" action="/results" data-controller="secure-code" data-target="secure-code.form">
-  <div id="security_check">
-    <label for="secure_code">Secure Code:</label>
-    <input type="text" id="secure_code" name="secure_code" data-target="secure-code.input" required>
-    <label for="date_of_birth">DOB:</label>
-    <input type="date" id="date_of_birth" name="date_of_birth" data-target="secure-code.input" required>
-    <div class="secure-code-error hidden" data-target="secure-code.secureCodeError"></div>
-    <input type="submit" value="Check" data-action="secure-code#enableSubmit">
-  </div>
-
-  <div id="main_form" class="hidden">
-    <div data-target="secure-code.element">
-      <label for="test_date" >When was this test taken?</label>
-      <input type="date" id="test_date" name="test_date" required disabled>
-      <label for="next_test_date">When is the followup test due?</label>
-      <input type="date" id="next_test_date" name="next_test_date">
-      <p>Select the infections that were tested?</p>
-      <% @infections.each do |infection| %>
-      <input type="checkbox" name="infection_ids[]" value="<%= infection.id %>"> <%= infection.name %>
-      <label for="status">What was the result?</label>
-      <input type="checkbox" name="status[]" value="positive <%= infection.id %>"> Positive
-      <input type="checkbox" name="status[]" value="negative <%= infection.id %>"> Negative
-      <label for="is_treated">Has treatment begun?</label>
-      <input type="checkbox" name="is_treated[]" value="true <%= infection.id %>"> Yes
-      <input type="checkbox" name="is_treated[]" value="false <%= infection.id %>"> No
-      <% end %>
-      <input type="submit" value="Submit">
-    </div>
-  </div>
-</form>
+<%= form_tag('/results', method: "post", html: { id: "results-form" }) do %>
+  <%= label_tag(:test_date, "When was this test taken?") %>
+  <%= date_field_tag(:test_date, nil , required: true) %><br>
+  <%= label_tag(:next_test_date, "When is the followup test due?") %>
+  <%= date_field_tag(:next_test_date) %><br>
+  <p>Select the infections that were tested?</p>
+  <% @infections.each do |infection| %>
+  <br>
+    <%= check_box_tag("infection_ids[]", infection.id) %> <%= infection.name %><br>
+    <%= label_tag(:status, "What was the result?") %> <br>
+    <%= check_box_tag("status[]", "positve #{infection.id}") %> Positive <br>
+    <%= check_box_tag("status[]", "negative #{infection.id}") %> Negative <br>
+    <%= label_tag(:is_treated, "Has treatment begun?") %> <br>
+    <%= check_box_tag("is_treated[]", "true #{infection.id}") %> Yes <br>
+    <%= check_box_tag("is_treated[]", "false #{infection.id}") %> No <br>
+  <% end %>
+  <br>
+  <%= submit_tag("Submit") %>
+<% end %>
