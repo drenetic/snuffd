@@ -136,11 +136,12 @@ before_action :validate_secure_code, only: %i[create]
     date_of_birth = params[:date_of_birth]
     @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
     @doctor = current_user
-    if @patient.nil? || @patient.secure_code_expired?
-      redirect_to new_result_path, notice: "Patient association is invalid."
+    if @patient.nil?
+      flash[notice:] = "Patient association is invalid."
     else
+      flash[notice:] = "Patient association is valid."
       # @patient.generate_secure_code
-      @patient.save
+      #@patient.save
     end
   end
 
