@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-// const infections = ["gonorrhoea", "chlamydia"]
 
 export default class extends Controller {
   static targets = ["gonorrhoeaTarget", "revealgonorrhoeaResults",

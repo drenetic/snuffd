@@ -212,7 +212,7 @@ puts "
       first_name: first_name,
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email(name: first_name),
-      nickname: Faker::Alphanumeric.alphanumeric(number: 8).upcase,
+      nickname: Faker::Hipster.word,
       gender: gender.sample,
       orientation: orientation.sample,
       password: "123456",
