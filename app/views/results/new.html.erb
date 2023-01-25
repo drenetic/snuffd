@@ -1,5 +1,5 @@
 <%= form_tag('/results', method: "post", html: { id: "results-form" },
-  data: { turbo: :false, controller: 'results' } ) do %>
+  data: { turbo: :false, controller: 'toggler' } ) do %>
   <%= label_tag(:test_date, "When was this test taken?") %>
   <%= date_field_tag(:test_date, nil , required: true) %><br>
   <%= label_tag(:next_test_date, "When is the followup test due?") %>
@@ -8,10 +8,10 @@
   <% @infections.each do |infection| %>
   <br>
     <%= check_box_tag(:"infection_ids[]", infection.id, false,
-    { data: { results_target: "#{infection.name.downcase}Target",
-    action: "change->results#reveal#{infection.name.downcase}Results" } }) %>
+    { data: { toggler_target: "#{infection.name.downcase}Target",
+    action: "change->toggler#reveal#{infection.name.downcase}Results" } }) %>
     <%= infection.name.gsub("_", " ") %> <br>
-    <div data-results-target=<%="reveal#{infection.name.downcase}Results"%>>
+    <div data-toggler-target=<%="reveal#{infection.name.downcase}Results"%>>
       <%= label_tag(:status, "What was the result?") %> <br>
       <%= check_box_tag("status[]", "positve #{infection.id}", false) %> Positive <br>
       <%= check_box_tag("status[]", "negative #{infection.id}", false) %> Negative <br>
