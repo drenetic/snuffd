@@ -14,7 +14,7 @@
         <div>
         <% @result.results_infections.each do |results_infection|  %>
           <div>
-            <h3><%= link_to Infection.find(results_infection.infection_id).name, result_results_infection_path(@result,results_infection) %> <%= results_infection.is_treated ? "👍" : "💊"%></h3>
+            <h3><%= link_to Infection.find(results_infection.infection_id).name.gsub("_", " "), result_results_infection_path(@result,results_infection) %> <%= results_infection.is_treated ? "👍" : "💊"%></h3>
           </div>
         <% end %>
         </div>

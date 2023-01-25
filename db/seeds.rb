@@ -261,7 +261,7 @@ chlam =
 hepb =
   Infection.create!(
     {
-      name: "Hepatitis B",
+      name: "Hepatitis_B",
       description:
         "Hepatitis B is a vaccine-preventable liver infection caused by the hepatitis B virus (HBV). Hepatitis B is spread when blood, semen, or other body fluids from a person infected with the virus enters the body of someone who is not infected.",
       duration: 183
@@ -270,7 +270,7 @@ hepb =
 hepc =
   Infection.create!(
     {
-      name: "Hepatitis C",
+      name: "Hepatitis_C",
       description:
         "Hepatitis C is a liver infection caused by the hepatitis C virus (HCV). Hepatitis C is spread through contact with blood from an infected person. Today, most people become infected with the hepatitis C virus by sharing needles or other equipment used to prepare and inject drugs.",
       duration: 183

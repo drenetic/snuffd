@@ -8,7 +8,7 @@
   <% else %>
   <% @results_infections.each do |results_infection| %>
     <li>
-      <%= results_infection.infection.name %>:
+      <%= results_infection.infection.name.gsub("_", " ") %>:
       <%= results_infection.status %>
       <% if results_infection.is_treated %>
         (treated)

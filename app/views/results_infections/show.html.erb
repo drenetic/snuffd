@@ -1,4 +1,4 @@
-<h1><%= @infection.name %></h1>
+<h1><%= @infection.name.gsub("_", " ") %></h1>
 
 <div>Status: <%= @result_infection.status %></div>
 <div>Start Date: <%= @result_infection.start_date.strftime("%d %b %y") %></div>
