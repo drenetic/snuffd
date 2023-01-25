@@ -18,3 +18,8 @@
   <% end %>
   <%= @result.links.last.expiration_date - Time.now %>
 </ul>
+
+<div data-controller="copy-link">
+  <input class="form-text"  data-copy-link-target="source" type="text" value=<%= @link  %> readonly>
+  <button  data-action="click->copy-link#copy">Copy URL</button>
+</div>

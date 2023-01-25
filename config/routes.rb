@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     member { get :confirmation }
     collection { get :share }
     resources :links, only: %i[] do
-      member { get :create }
+      collection { get :create }
     end
   end
 
