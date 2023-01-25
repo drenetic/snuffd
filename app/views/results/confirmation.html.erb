@@ -16,7 +16,7 @@
 <div>
  <% @result.results_infections.each do |results_infection|  %>
   <div>
-    <h3><%= results_infection.infection.name  %></h3>
+    <h3><%= results_infection.infection.name.gsub("_", " ")  %></h3>
     <p>Status: <%= results_infection.status  %></p>
     <p>Is currently <%= results_infection.is_treated ? "" : "not" %> being treated.</p>
   </div>

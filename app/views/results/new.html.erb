@@ -1,4 +1,5 @@
-<%= form_tag('/results', method: "post", html: { id: "results-form" }) do %>
+<%= form_tag('/results', method: "post", html: { id: "results-form" },
+  data: { turbo: :false, controller: 'toggler' } ) do %>
   <%= label_tag(:test_date, "When was this test taken?") %>
   <%= date_field_tag(:test_date, nil , required: true) %><br>
   <%= label_tag(:next_test_date, "When is the followup test due?") %>
@@ -6,14 +7,19 @@
   <p>Select the infections that were tested?</p>
   <% @infections.each do |infection| %>
   <br>
-    <%= check_box_tag("infection_ids[]", infection.id) %> <%= infection.name %><br>
-    <%= label_tag(:status, "What was the result?") %> <br>
-    <%= check_box_tag("status[]", "positve #{infection.id}") %> Positive <br>
-    <%= check_box_tag("status[]", "negative #{infection.id}") %> Negative <br>
-    <%= label_tag(:is_treated, "Has treatment begun?") %> <br>
-    <%= check_box_tag("is_treated[]", "true #{infection.id}") %> Yes <br>
-    <%= check_box_tag("is_treated[]", "false #{infection.id}") %> No <br>
+    <%= check_box_tag(:"infection_ids[]", infection.id, false,
+    { data: { toggler_target: "#{infection.name.downcase}Target",
+    action: "change->toggler#reveal#{infection.name.downcase}Results" } }) %>
+    <%= infection.name.gsub("_", " ") %> <br>
+    <div data-toggler-target=<%="reveal#{infection.name.downcase}Results"%>>
+      <%= label_tag(:status, "What was the result?") %> <br>
+      <%= check_box_tag("status[]", "positve #{infection.id}", false) %> Positive <br>
+      <%= check_box_tag("status[]", "negative #{infection.id}", false) %> Negative <br>
+      <%= label_tag(:is_treated, "Has treatment begun?") %> <br>
+      <%= check_box_tag("is_treated[]", "true #{infection.id}", false) %> Yes <br>
+      <%= check_box_tag("is_treated[]", "false #{infection.id}", false) %> No <br>
+    </div>
   <% end %>
-  <br>
+    <br>
   <%= submit_tag("Submit") %>
 <% end %>
