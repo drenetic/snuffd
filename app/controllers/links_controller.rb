@@ -16,7 +16,7 @@ class LinksController < ApplicationController
   def create
     result = Result.find(params[:result_id])
     link_uuid = SecureRandom.uuid
-    expiration_date = Time.now + 5.minutes
+    expiration_date = Time.now + 10.minutes
     link =
       Link.new(
         uuid: link_uuid,
