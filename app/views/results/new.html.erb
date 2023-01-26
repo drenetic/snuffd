@@ -3,81 +3,89 @@
 <% end %>
 
 <%= form_tag('/results', method: "post", html: { id: "security-form"}) do %>
-<div class="mb-5">
-  <div class="row">
-    <div class="col">
-      <%= label_tag(:secure_code, "Patient token code", class: "input-label") %>
-      <%= text_field_tag(:secure_code, nil, required: true, class: "form-control me-3") %>
+
+<div class="card mb-3 p-3">
+  <div class="mb-3">
+    <div class="row">
+      <div class="col">
+        <%= label_tag(:secure_code, "Patient Associate Token", class: "input-label mb-2") %>
+        <%= text_field_tag(:secure_code, nil, required: true, class: "form-control me-3") %>
+      </div>
+      <div class="col">
+        <%= label_tag(:date_of_birth, "Patient DOB:", class: "input-label mb-2") %>
+        <%= date_field_tag(:date_of_birth, nil, required: true, class: "form-control me-3") %><br>
+      </div>
     </div>
-    <div class="col">
-      <%= label_tag(:date_of_birth, "Patient DOB:", class: "input-label") %>
-      <%= date_field_tag(:date_of_birth, nil, required: true, class: "form-control me-3") %><br>
-    </div>
-    <%= submit_tag 'Validate', class: 'btn btn-primary' %>
   </div>
 </div>
 
 <div id="results-form">
-  <div class="mb-5">
-    <div class="row">
-      <div class="col">
-        <%= label_tag(:test_date, "Test Date: ") %>
-        <%= date_field_tag(:test_date, nil , required: true, class: "form-control" ) %><br>
-      </div>
-      <div class="col">
-        <%= label_tag(:next_test_date, "Follow-up Test Date:") %>
-        <%= date_field_tag(:next_test_date, nil , class: "form-control") %><br>
+  <div class="card mb-3 p-3">
+    <div class="mb-3">
+      <div class="row">
+        <div class="col">
+          <%= label_tag(:test_date, "Test Date:", class: "input-label") %>
+          <%= date_field_tag(:test_date, nil , required: true, class: "form-control" ) %><br>
+        </div>
+        <div class="col">
+          <%= label_tag(:next_test_date, "Follow-up Test Date:", class: "input-label") %>
+          <%= date_field_tag(:next_test_date, nil , class: "form-control") %><br>
+        </div>
       </div>
     </div>
   </div>
 
   <% @infections.each do |infection| %>
-
-  <div class="row mb-3">
-    <label for="inputEmail3" class="col-sm-2 col-form-labe h3"><%= infection.name %></label>
-    <div class="col-sm-10">
-
+  <div class="card mb-3 p-3">
+    <div class="row mb-3">
+      <label for="inputEmail3"
+        class="col-sm-2 col-form-label"><strong><%= infection.name.gsub("_", " ").upcase %></strong></label>
+      <div class="col-sm-10">
+        <div class="form-check form-switch">
+          <%= check_box_tag "infection_ids[]", infection.id, false, class: "form-check-input", role: "switch" %>
+          <label class="form-check-label" for="<%infection.id%>"></label>
+        </div>
+      </div>
     </div>
+
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Infection Status</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <%= check_box_tag("status[]", "positive #{infection.id}") %>
+          <label class="form-check-label" for="">
+            Detected
+          </label>
+        </div>
+        <div class="form-check">
+          <%= check_box_tag("status[]", "negative #{infection.id}" ) %>
+          <label class="form-check-label" for="">
+            Not Detected
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Treatment Status</legend>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <%= check_box_tag("is_treated[]", "true #{infection.id}") %>
+          <label class="form-check-label" for="">
+            Yes, prescription issued
+          </label>
+        </div>
+        <div class="form-check">
+          <%= check_box_tag("is_treated[]", "false #{infection.id}") %>
+          <label class="form-check-label" for="">
+            Not applicable
+          </label>
+        </div>
+      </div>
+    </fieldset>
   </div>
-
-  <fieldset class="row mb-3">
-    <legend class="col-form-label col-sm-2 pt-0">Infection Status</legend>
-    <div class="col-sm-10">
-      <div class="form-check">
-        <%= check_box_tag("status[]", "positive #{infection.id}") %>
-        <label class="form-check-label" for="">
-          Positive
-        </label>
-      </div>
-      <div class="form-check">
-        <%= check_box_tag("status[]", "negative #{infection.id}" ) %>
-        <label class="form-check-label" for="">
-          Negative
-        </label>
-      </div>
-    </div>
-  </fieldset>
-
-<fieldset class="row mb-3">
-    <legend class="col-form-label col-sm-2 pt-0">Treatment Status</legend>
-    <div class="col-sm-10">
-      <div class="form-check">
-        <%= check_box_tag("is_treated[]", "true #{infection.id}") %>
-        <label class="form-check-label" for="">
-          Yes
-        </label>
-      </div>
-      <div class="form-check">
-        <%= check_box_tag("is_treated[]", "false #{infection.id}") %>
-        <label class="form-check-label" for="">
-          No
-        </label>
-      </div>
-    </div>
-  </fieldset>
-
-<% end %>
+  <% end %>
 
 
-<%= submit_tag 'Create Result', class: 'btn btn-primary' %>
-<% end %>
+  <%= submit_tag 'Create Result', class: 'btn btn-primary' %>
+  <% end %>
