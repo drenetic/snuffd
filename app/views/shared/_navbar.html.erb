@@ -31,18 +31,23 @@
           <% if current_user.is_doctor == true %>
 
           <%= link_to new_result_path, class: "nav-link text-nowrap" do %>
-          <%= icon('fa-solid', 'plus')%> Create Result
+          <%= icon('fa-duotone', 'square-plus')%> Create Result
           <% end %>
 
           <%= link_to results_path, class: "nav-link text-nowrap" do %>
-          <%= icon('fa-solid', 'people-group')%> My Patients
+          <%= icon('fa-duotone', 'people-group')%> My Patients
           <% end %>
         </div>
 
         <% else %>
 
-        <%= link_to "My Results", results_path, class: "nav-link text-nowrap" %>
-        <%= link_to "My Links", links_path, class: "nav-link text-nowrap" %>
+          <%= link_to results_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-duotone', 'cards-blank')%> My Results
+          <% end %>
+
+          <%= link_to links_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-duotone', 'link')%> My Shared Links
+          <% end %>
       </div>
 
       <% end %>
@@ -79,7 +84,11 @@
 
 
       <div class="nav-item mx-2">
-        <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
+          <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" do %>
+          <%= icon('fa-duotone', 'door-open')%> Logout
+          <% end %>
+
+
       </div>
     </div>
 

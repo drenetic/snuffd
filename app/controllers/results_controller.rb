@@ -112,8 +112,8 @@ class ResultsController < ApplicationController
       redirect_to new_result_path, notice: "Patient association is invalid."
     else
       create
-      # @patient.generate_secure_code
-      # @patient.save
+      @patient.generate_secure_code
+      @patient.save
     end
   end
 
