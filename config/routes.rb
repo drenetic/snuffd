@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :results_infections, only: %i[show]
     member { get :confirmation }
     collection { post :validate }
+    collection { get :share }
     resources :links, only: %i[] do
       collection { get :create }
     end
