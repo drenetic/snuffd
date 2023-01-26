@@ -5,5 +5,6 @@
 import { application } from "./application"
 import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers"
 
+const application = Application.start();
 const context = require.context("../controllers", true, /\.js$/)
-Stimulus.load(definitionsFromContext(context))
+application.load(definitionsFromContext(context));

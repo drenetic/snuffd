@@ -93,7 +93,7 @@ class ResultsController < ApplicationController
 
   def share
     link = Link.find_by(uuid: params[:uuid])
-
+    @link = share_results_url+"?uuid="+params[:uuid]
     if link && !link.expired?
       @result = Result.find(link.result_id)
       @results_infections = ResultsInfection.where(result_id: @result.id)
