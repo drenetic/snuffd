@@ -30,8 +30,13 @@
           <% if user_signed_in? %>
           <% if current_user.is_doctor == true %>
 
-          <%= link_to icon('fa-solid', 'fa-plus'), :action => "new"%> <%= link_to "Create Result", new_result_path, class: "nav-link text-nowrap" %>
-          <%= link_to "My Patients", results_path, class: "nav-link text-nowrap" %>
+          <%= link_to new_result_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-solid', 'plus')%> Create Result
+          <% end %>
+
+          <%= link_to results_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-solid', 'people-group')%> My Patients
+          <% end %>
         </div>
 
         <% else %>
