@@ -4,7 +4,6 @@ export default class extends Controller {
   static targets = ["display"]
 
   initialize() {
-    console.log(this.data.get("expiration"))
     this.secondsRemaining = parseInt(this.data.get("seconds"))
     this.intervalId = setInterval(() => this.updateTimer(), 1000)
   }
