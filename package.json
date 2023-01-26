@@ -12,5 +12,8 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.11.1"
   }
 }

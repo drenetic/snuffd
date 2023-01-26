@@ -8,14 +8,17 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"/>
+   <script src="https://kit.fontawesome.com/5678bf38de.js" data-mutate-approach="sync"></script>
 </head>
 
 <body>
-<%= render "shared/navbar" %>
+  <%= render "shared/navbar" %>
+  <%= render "shared/flashes" %>
 
-    <div class="container mt-5">
-      <%= yield %>
-    </div>
+  <div class="container mt-5">
+    <%= yield %>
+  </div>
 </body>
 
 </html>
