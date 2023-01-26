@@ -245,7 +245,7 @@ gono =
     {
       name: "Gonorrhoea",
       description:
-        "Gonorrhea is an STD that can cause infection in the genitals, rectum, and throat. It is very common, especially among young people ages 15-24 years.",
+        "Gonorrhea is a curable STD that can cause infection in the genitals, rectum, and throat. It is very common, especially among young people ages 15-24 years.",
       duration: 7
     }
   )
@@ -254,7 +254,7 @@ chlam =
     {
       name: "Chlamydia",
       description:
-        "Chlamydia is a common STD that can cause infection among both men and women. It can cause permanent damage to a woman's reproductive system. This can make it difficult or impossible to get pregnant later.",
+        "Chlamydia is a curable, common STD that can cause infection among both men and women. It can cause permanent damage to a woman's reproductive system. This can make it difficult or impossible to get pregnant later.",
       duration: 7
     }
   )
@@ -263,7 +263,7 @@ hepb =
     {
       name: "Hepatitis_B",
       description:
-        "Hepatitis B is a vaccine-preventable liver infection caused by the hepatitis B virus (HBV). Hepatitis B is spread when blood, semen, or other body fluids from a person infected with the virus enters the body of someone who is not infected.",
+        "Hepatitis B is a vaccine-preventable liver infection caused by the hepatitis B virus (HBV). Hepatitis B is spread when blood, semen, or other body fluids from a person infected with the virus enters the body of someone who is not infected. While preventable through vaccination, it is not curable if you have the condition.",
       duration: 183
     }
   )
@@ -272,7 +272,7 @@ hepc =
     {
       name: "Hepatitis_C",
       description:
-        "Hepatitis C is a liver infection caused by the hepatitis C virus (HCV). Hepatitis C is spread through contact with blood from an infected person. Today, most people become infected with the hepatitis C virus by sharing needles or other equipment used to prepare and inject drugs.",
+        "Hepatitis C is a curable liver infection caused by the hepatitis C virus (HCV). Hepatitis C is spread through contact with blood from an infected person. Today, most people become infected with the hepatitis C virus by sharing needles or other equipment used to prepare and inject drugs.",
       duration: 183
     }
   )
@@ -281,7 +281,7 @@ syph =
     {
       name: "Syphilis",
       description:
-        "Syphilis is a sexually transmitted disease (STD) caused by the bacterium Treponema pallidum. Syphilis can cause serious health effects without adequate treatment.",
+        "Syphilis is a curable sexually transmitted disease (STD) caused by the bacterium Treponema pallidum. Syphilis can cause serious health effects without adequate treatment.",
       duration: 21
     }
   )
@@ -294,6 +294,25 @@ hiv =
       duration: 0
     }
   )
+  hsv =
+  Infection.create!(
+    {
+      name: "Genital Herpes",
+      description:
+        "Genital herpes is an incurable infection caused by the herpes simplex virus (HSV) and can often be spread by skin-to-skin contact during sexual activity. Some people infected with the virus may have very mild symptoms or no symptoms, however, they can still spread the virus to others.",
+      duration: 0
+    }
+  )
+  hpv =
+  Infection.create!(
+    {
+      name: "Human Papillomavirus",
+      description:
+        "Human Papillomavirus (HPV) is an vaccine-preventable infection that causes warts in various parts of the body, depending on the strain. Many people with HPV don't develop any symptoms but can still infect others through sexual contact. While preventable through vaccination, it is not curable if you have the condition. ",
+      duration: 0
+    }
+  )
+
 
 puts "
   ============================
