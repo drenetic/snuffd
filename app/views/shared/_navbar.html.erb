@@ -4,14 +4,20 @@
       <% if user_signed_in? && current_user.is_doctor == true %>
       <div class="row">
         <div class="col me-5">
-          <%= link_to "SNUFFD", root_path, class: "navbar-brand logo" %>
-          <div class="md-2 text-white"><i>for</i> HEALTH PROFESSIONALS</div>
+          <%= link_to root_path, class: "navbar-brand logo" do %>
+          <%= image_tag "snuffd_favicon.png", height: '32', width: '32', class: "d-inline-block align-text-bottom" %>
+          SNUFFD
+          <%end%>
+          <div class="md-2 text-white"><em>for</em> HEALTH PROFESSIONALS</div>
         </div>
       </div>
       <% else %>
       <div class="row">
         <div class="col me-5">
-          <%= link_to "SNUFFD", root_path, class: "navbar-brand logo" %>
+          <%= link_to root_path, class: "navbar-brand logo" do %>
+          <%= image_tag "snuffd_favicon.png", height: '32', width: '32', class: "d-inline-block align-text-bottom" %>
+          SNUFFD
+          <%end%>
         </div>
       </div>
       <% end %>
@@ -41,13 +47,13 @@
 
         <% else %>
 
-          <%= link_to results_path, class: "nav-link text-nowrap" do %>
-          <%= icon('fa-duotone', 'cards-blank')%> My Results
-          <% end %>
+        <%= link_to results_path, class: "nav-link text-nowrap" do %>
+        <%= icon('fa-duotone', 'cards-blank')%> My Results
+        <% end %>
 
-          <%= link_to links_path, class: "nav-link text-nowrap" do %>
-          <%= icon('fa-duotone', 'link')%> My Shared Links
-          <% end %>
+        <%= link_to links_path, class: "nav-link text-nowrap" do %>
+        <%= icon('fa-duotone', 'link')%> My Shared Links
+        <% end %>
       </div>
 
       <% end %>
@@ -84,9 +90,9 @@
 
 
       <div class="nav-item mx-2">
-          <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" do %>
-          <%= icon('fa-duotone', 'door-open')%> Logout
-          <% end %>
+        <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" do %>
+        <%= icon('fa-duotone', 'door-open')%> Logout
+        <% end %>
 
 
       </div>
