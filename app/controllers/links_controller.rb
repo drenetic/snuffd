@@ -2,8 +2,15 @@ class LinksController < ApplicationController
   before_action :authenticate_user!, only: %i[index create]
 
   def index
-    @results = Result.all
-    @links = Link.where(result_id: @results.ids)
+    results = Result.where(user_id: current_user.id)
+    all_links = Link.where(result_id: results.ids)
+    current_links = []
+    all_links.each do |link|
+      if link.expiration_date > Time.now
+        current_links.push(link)
+      end
+    end
+    @links = current_links
   end
 
   def create
