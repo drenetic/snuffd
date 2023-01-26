@@ -11,8 +11,6 @@
     </div>
   </div>
 
-
-
   <div class="card-detail">
     <div class="card">
       <h2>Results from <%= @result.test_date.strftime("%d %b %y") %></h2>
@@ -32,7 +30,7 @@
         <% end %>
       </div>
       <% if user_signed_in? && !current_user.is_doctor %>
-      <%= link_to "Generate Link", result_link_path(@result) %>
+      <%= link_to "Generate Link", result_links_path(@result) %>
       <%= link_to "Delete this result!", result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
       <% end %>
     </div>
