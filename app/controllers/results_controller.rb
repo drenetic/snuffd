@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
-before_action :authenticate_link, only: %i[share]
+  before_action :validate, only: %i[create]
+  before_action :authenticate_link, only: %i[share]
 
   def new
     if current_user.is_doctor
@@ -20,13 +21,13 @@ before_action :authenticate_link, only: %i[share]
   end
 
   def create
-    @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
-    #####################################
-    # The below needs to change where the doctor_id is the current user and the special code links doctor and patient
-    @result.user = current_user
-    #####################################
-    @result.doctor = current_user
-    if @result.save
+    @infections = Infection.all
+    @result = Result.new(test_date: params[:test_date], next_test_date: params[:next_test_date])
+    @result.user_id = @patient.id
+    @result.doctor_id = @doctor.id
+    if !params[:infection_ids].present?
+      redirect_to new_result_path, notice: "No infections selected"
+    elsif @result.save && params[:infection_ids].present?
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
         results_infection.start_date = @result.test_date
@@ -102,10 +103,24 @@ before_action :authenticate_link, only: %i[share]
     end
   end
 
+  def validate
+    secure_code = params[:secure_code]
+    date_of_birth = params[:date_of_birth]
+    @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
+    @doctor = current_user
+    if @patient.nil?
+      redirect_to new_result_path, notice: "Patient association is invalid."
+    else
+      create
+      # @patient.generate_secure_code
+      # @patient.save
+    end
+  end
+
   private
 
   def result_params
-    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id,)
+    params.require(:result).permit(:test_date, :next_test_date, :user_id, :doctor_id, :date_of_birth)
   end
 
   def results_infections_params
