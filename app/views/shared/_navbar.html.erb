@@ -19,8 +19,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-        <div class="progress-container">
-          <div class="progress-bar" id="myBar">
+        <div class="border-container">
+          <div class="border-bar" id="myBar">
           </div>
         </div>
       </button>
@@ -30,8 +30,13 @@
           <% if user_signed_in? %>
           <% if current_user.is_doctor == true %>
 
-          <%= link_to "New Patient", new_result_path, class: "nav-link text-nowrap" %>
-          <%= link_to "My Patients", results_path, class: "nav-link text-nowrap" %>
+          <%= link_to new_result_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-solid', 'plus')%> Create Result
+          <% end %>
+
+          <%= link_to results_path, class: "nav-link text-nowrap" do %>
+          <%= icon('fa-solid', 'people-group')%> My Patients
+          <% end %>
         </div>
 
         <% else %>
@@ -57,13 +62,13 @@
         <% if current_user.is_doctor == true %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, Dr. #{current_user.nickname}" %>
+          <%= "👋 Hi, Dr. #{current_user.nickname} (#{current_user.secure_code})" %>
         </a>
 
         <% else %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, #{current_user.nickname}" %>
+          <%= "👋 Hi, #{current_user.nickname} (#{current_user.secure_code})" %>
         </a>
 
         <% end %>
@@ -91,7 +96,4 @@
       <div class="border-bar" id="myBar">
       </div>
     </div>
-      <% flash.each do |type, msg| %>
-  <div class="alert"><%= msg %></div>
-  <% end %>
   </nav>

@@ -6,16 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://kit.fontawesome.com/5678bf38de.js" data-mutate-approach="sync"></script>
 </head>
 
 <body>
-<%= render "shared/navbar" %>
+  <%= render "shared/navbar" %>
+  <%= render "shared/flashes" %>
 
-    <div class="container mt-5">
-      <%= yield %>
-    </div>
+  <div class="container mt-5">
+    <%= yield %>
+  </div>
 </body>
 
 </html>

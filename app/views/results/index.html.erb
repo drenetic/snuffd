@@ -14,43 +14,26 @@
 <% else %>
 
   <div class="container">
+  <div class="row">
     <% @results.each do |result| %>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <%= link_to result_path(result), class: "no-underline" do %>
-              <div class="card-header">
-              <h1><%= result.test_date.day %></h1>
-              </div>
-              <p><b>Result ID </b> <%= result.id %> </p>
-              <p><b>Patient Name</b> <%= result.user.first_name %></p>
-              <% result.infections.each do |infection| %>
-              <p><li><%= infection.name.gsub("_", " ") %></li></p>
-              <% end %>
-              <br>
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+    <%= render partial: "shared/card", locals: {result: result} %>
     <% end %>
+    </div>
   </div>
 
 <% end %>
 
 <script>
-  let searchInput;
-  searchInput = document.getElementById("search-input");
-  let list = document.getElementById("patient-list");
+  var searchInput = document.getElementById("search-input");
+  var list = document.getElementById("patient-list");
 
   searchInput.addEventListener("keyup", function() {
-    let searchValue = this.value.toLowerCase();
-    let listItems = list.getElementsByTagName("li");
+    var searchValue = this.value.toLowerCase();
+    var listItems = list.getElementsByTagName("li");
 
-    for (let i = 0; i < listItems.length; i++) {
-      let item = listItems[i];
-      let itemValue = item.innerHTML.toLowerCase();
+    for (var i = 0; i < listItems.length; i++) {
+      var item = listItems[i];
+      var itemValue = item.innerHTML.toLowerCase();
       if (itemValue.indexOf(searchValue) != -1) {
         item.style.display = "block";
       } else {
