@@ -10,6 +10,8 @@
   border-width: 1px;
   border-color:#DDD;
   //box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  // animation: bounce; /* referring directly to the animation's @keyframe declaration */
+  // animation-duration: 2s;
 }
 .card-header {
   font-size: 30px;
