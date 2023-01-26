@@ -1,4 +1,7 @@
-document.getElementById("results-form").addEventListener("submit", function(event) {
+const security_form = document.getElementById("security-form");
+const results_form = document.getElementById("results-form");
+
+security_form?.addEventListener("submit", function(event) {
   event.preventDefault(); // prevent form submission
   const secureCode = document.getElementById("secure_code").value;
   const dateOfBirth = document.getElementById("date_of_birth").value;
@@ -16,7 +19,8 @@ document.getElementById("results-form").addEventListener("submit", function(even
     if (typeof data.id === 'number' && data.id >= 0) {
       // Secure code is valid, proceed with form submission
       document.getElementById("main_form").classList.remove("hidden");
-      document.getElementById("secure_form").classList.add("hidden");
+      document.getElementById("security-form").classList.add("hidden");
+      document.getElementById("test_date").disabled = false;
     } else {
       // Secure code is invalid, show an error message
       document.getElementById("secure-code-error").innerHTML = data.error;

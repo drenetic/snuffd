@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
-before_action :authenticate_link, only: %i[share]
-before_action :validate_secure_code, only: %i[create]
+  before_action :validate, only: %i[create]
+  before_action :authenticate_link, only: %i[share]
 
   def new
     if current_user.is_doctor
@@ -22,10 +22,12 @@ before_action :validate_secure_code, only: %i[create]
 
   def create
     @infections = Infection.all
-    @result = Result.new(test_date: params[:test_date], next_test_date: params[:test_date])
+    @result = Result.new(test_date: params[:test_date], next_test_date: params[:next_test_date])
     @result.user_id = @patient.id
     @result.doctor_id = @doctor.id
-    if @result.save && !@infections.nil?
+    if !params[:infection_ids].present?
+      redirect_to new_result_path, notice: "No infections selected"
+    elsif @result.save && params[:infection_ids].present?
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
         results_infection.start_date = @result.test_date
@@ -106,12 +108,12 @@ before_action :validate_secure_code, only: %i[create]
     date_of_birth = params[:date_of_birth]
     @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
     @doctor = current_user
-    if @patient.nil? || @patient.secure_code_expired?
+    if @patient.nil?
       redirect_to new_result_path, notice: "Patient association is invalid."
     else
+      create
       # @patient.generate_secure_code
       # @patient.save
-      render json: @patient
     end
   end
 
@@ -144,20 +146,4 @@ before_action :validate_secure_code, only: %i[create]
       render plain: "Invalid link"
     end
   end
-
-  def validate_secure_code
-    secure_code = params[:secure_code]
-    date_of_birth = params[:date_of_birth]
-    @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
-    @doctor = current_user
-    if @patient.nil?
-      flash[notice:] = "Patient association is invalid."
-    else
-      flash[notice:] = "Patient association is valid."
-      # @patient.generate_secure_code
-      #@patient.save
-    end
-  end
-
-
 end
