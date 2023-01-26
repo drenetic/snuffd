@@ -1,11 +1,12 @@
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Bebas+Neue&family=Inter+Tight:wght@900&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Bebas+Neue&family=Inter+Tight:wght@900&family=Inter:wght@400;700&family=Space+Mono&display=swap');
 
 
 // Define fonts for body and headers
-$body-font: "Space Mono", "Courier", "serif";
-$headers-font: "Bebas Neue", "Helvetica", "sans-serif";
+$body-font: 'Inter', sans-serif;
+$headers-font: 'Inter', sans-serif;
 $logo-font: "Inter Tight", "Helvetica", "sans-serif";
+$mono-font: 'Space Mono', monospace;
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

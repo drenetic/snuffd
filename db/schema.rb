@@ -104,8 +104,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_041716) do
     t.datetime "date_of_birth"
     t.boolean "is_doctor"
     t.string "provider_number"
+    t.string "secure_code"
+    t.datetime "code_expiration_date"
+    t.integer "code_uses_remaining"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["secure_code"], name: "index_users_on_secure_code", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
