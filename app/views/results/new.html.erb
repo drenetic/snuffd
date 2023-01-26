@@ -36,17 +36,20 @@
   </div>
 
   <% @infections.each do |infection| %>
+  <div data-controller="showhide">
   <div class="card mb-3 p-3">
     <div class="row mb-3">
       <label for="inputEmail3"
         class="col-sm-2 col-form-label"><strong><%= infection.name.gsub("_", " ").upcase %></strong></label>
       <div class="col-sm-10">
         <div class="form-check form-switch">
-          <%= check_box_tag "infection_ids[]", infection.id, false, class: "form-check-input", role: "switch" %>
+          <%= check_box_tag "infection_ids[]", infection.id, false, class: "form-check-input", role: "switch", data: { showhide_target: "input", action: "change->showhide#toggle" } %>
           <label class="form-check-label" for="<%infection.id%>"></label>
         </div>
       </div>
     </div>
+
+  <div data-showhide-target="output" hidden="">
 
     <fieldset class="row mb-3">
       <legend class="col-form-label col-sm-2 pt-0">Infection Status</legend>
@@ -84,6 +87,9 @@
       </div>
     </fieldset>
   </div>
+
+</div>
+</div>
   <% end %>
 
 

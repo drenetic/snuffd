@@ -119,8 +119,6 @@ GEM
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
-    font-awesome-sass (6.2.1)
-      sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     haml (6.1.1)
@@ -291,6 +289,12 @@ GEM
       nokogiri (~> 1.8)
     zeitwerk (2.6.6)
 
+GEM
+  remote: https://token:135D925A-918B-48B0-B67A-F41E0059C84B@dl.fontawesome.com/basic/fontawesome-pro/ruby/
+  specs:
+    font-awesome-pro-sass (6.2.1)
+      sassc (~> 2.0)
+
 PLATFORMS
   arm64-darwin-21
   x86_64-darwin-20
@@ -306,7 +310,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   faker
-  font-awesome-sass (~> 6.2)
+  font-awesome-pro-sass (= 6.2.1)!
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
