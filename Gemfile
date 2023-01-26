@@ -50,7 +50,9 @@ gem "sassc-rails"
 
 gem "devise"
 gem "autoprefixer-rails"
-gem "font-awesome-sass", "~> 6.2"
+source "https://token:135D925A-918B-48B0-B67A-F41E0059C84B@dl.fontawesome.com/basic/fontawesome-pro/ruby/" do
+  gem "font-awesome-pro-sass", "6.2.1"
+end
 gem "simple_form", github: "heartcombo/simple_form"
 gem "cloudinary"
 gem "faker"
