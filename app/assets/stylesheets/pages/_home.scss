@@ -32,3 +32,10 @@ body{
   -moz-background-clip:    padding;
   background-clip:         padding-box;
 }
+
+.notice-box {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+}
