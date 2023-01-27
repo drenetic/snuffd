@@ -1,13 +1,17 @@
 <div class="px-4 pt-5 mt-5 text-center">
+<% if user_signed_in? %>
+  <h1 class="display-1 fw-bold logo">Hey <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
+  <% else %>
   <h1 class="display-1 fw-bold logo">Safe is <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
+  <% end %>
   <div class="col-lg-6 mx-auto" >
     <p class="gray-800 lead mb-4">High fives, not STIs. Keep your sexual health in check.</p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
     <% if user_signed_in? && current_user.is_doctor == false %>
-      <p>Welcome back, <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %><br>
-      Your next test is due: ...</p>
+      <h3 class="gray-900">Welcome back, <%= current_user.first_name.capitalize %><br>
+      Your next test is due <%= @last_result.next_test_date ? "on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "... who knows when?"%></h3>
       <% elsif user_signed_in? && current_user.is_doctor == true %>
-      <p>Welcome back, Dr. <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></p>
+      <h3 class="gray-900">Welcome back, Dr. <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h3>
       <% else %>
       <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 mt-sm-2 mb-sm-2 border-radius-375 transition duration-300 ease-in-out transform hover:scale-105 gradient-background gradient-background:hover" do %>
         Join now
