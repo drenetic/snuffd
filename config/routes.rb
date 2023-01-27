@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   get '/results/patient/:patient_id', to: 'results#patient', as: 'results_patient'
 
+  devise_scope :user do
+    post 'users/sign_up', to: 'devise/registrations#create'
+  end
+
   devise_for :users
   root to: "pages#home"
 end
