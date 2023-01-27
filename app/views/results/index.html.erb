@@ -1,12 +1,10 @@
 <% if current_user.is_doctor %>
 
-  <input type="text" id="search-input" placeholder="Patient Search...">
+  <input type="text" id="search-input" placeholder="Patient Search.." class="mb-3">
   <div id="patient-list">
     <% @patients.each do |patient| %>
       <p>
-        <li>
-          <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
-        </li>
+         <i class="fa-duotone fa-folder-medical"></i> <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
       </p>
     <% end %>
   </div>
@@ -29,7 +27,7 @@
 
   searchInput.addEventListener("keyup", function() {
     var searchValue = this.value.toLowerCase();
-    var listItems = list.getElementsByTagName("li");
+    var listItems = list.getElementsByTagName("p");
 
     for (var i = 0; i < listItems.length; i++) {
       var item = listItems[i];
