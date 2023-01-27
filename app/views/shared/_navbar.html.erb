@@ -54,6 +54,11 @@
         <%= link_to links_path, class: "nav-link text-nowrap" do %>
         <%= icon('fa-duotone', 'link')%> My Shared Links
         <% end %>
+
+        <%= link_to secure_token_path, class: "nav-link text-nowrap", data: { turbo_frame: "remote_modal" } do %>
+        <%= icon('fa-duotone', 'shield-keyhole')%> Generate Token
+        <% end %>
+
       </div>
 
       <% end %>
@@ -73,13 +78,13 @@
         <% if current_user.is_doctor == true %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, Dr. #{current_user.nickname} (#{current_user.secure_code})" %>
+          <%= "👋 Hi, Dr. #{current_user.nickname}" %>
         </a>
 
         <% else %>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          <%= "👋 Hi, #{current_user.nickname} (#{current_user.secure_code})" %>
+          <%= "👋 Hi, #{current_user.nickname}" %>
         </a>
 
         <% end %>

@@ -126,6 +126,12 @@ class ResultsController < ApplicationController
     end
   end
 
+  def generate_token
+    @user = current_user
+    @user.generate_secure_code
+    @user.save
+  end
+
   private
 
   def result_params
