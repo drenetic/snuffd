@@ -33,6 +33,35 @@ body{
   color: $gray-900;
 }
 
+
+
+.boujee-text {
+  --bg-size: 400%;
+  --color-one: rgb(255, 148, 18);
+  --color-two: rgb(226, 0, 226);
+  background: linear-gradient(
+      90deg,
+      var(--color-one),
+      var(--color-two),
+      var(--color-one),
+    )
+    0 0 / var(--bg-size) 100%;
+  color: transparent;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .boujee-text {
+    animation: move-bg 8s cubic-bezier(.42,0,.58,1) infinite;
+  }
+  @keyframes move-bg {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+}
+
+
 .gradient-text {
   background-image: linear-gradient(to right, $pink-500 , $orange-500);
   -webkit-background-clip: text;
@@ -70,12 +99,20 @@ body{
   border-radius: 0.375rem;
 }
 
+.blue-500 {
+  color: $blue-500;
+}
+
 .pink-500 {
   color: $pink-500;
 }
 
 .orange-500 {
   color: $orange-500;
+}
+
+.yellow-500 {
+  color: $yellow-500;
 }
 
 .red-500 {
