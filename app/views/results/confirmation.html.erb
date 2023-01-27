@@ -1,4 +1,5 @@
-<h2>Test Results for <%= @result.user.first_name %></h2>
+<div class="container">
+<h2 class="mb-3" >Test Results for <%= @result.user.first_name %></h2>
 
 <div class="table-responsive">
   <table class="table align-middle">
@@ -27,7 +28,7 @@
   </table>
 </div>
 
-<h3 class="mt-4">Infections</h3>
+<h3 class="mt-4 mb-3">Infections</h3>
 <div class="table-responsive">
   <table class="table align-middle">
     <thead>
@@ -52,6 +53,13 @@
 </div>
 
 <% if user_signed_in? && current_user.is_doctor %>
-  <%= link_to "Confirm Result", result_path(@result), class: "btn btn-primary pink-button transition duration-300 ease-in-out transform hover:scale-105 pink-button pink-button:hover mrt-4" %>
-  <%= link_to "Delete", result_path(@result), class: "btn btn-danger text-white transition duration-300 ease-in-out transform hover:scale-105 m-4" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<div class="mt-5">
+  <%= link_to result_path(@result), class: "btn btn-primary me-3" do %>
+  <%= icon('fa-duotone', 'check') %> Confirm Result
+  <% end %>
+
+  <%= link_to result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+  <%= icon('fa-duotone', 'trash') %> Delete
+  <%end%>
+  </div>
 <% end %>

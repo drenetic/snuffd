@@ -1,7 +1,5 @@
 <div class="container">
-  <div class="container">
-    <h1>Personal View</h1>
-  </div>
+    <h2>Detailed Result</h2>
 
   <div class="container mt-5 mb-3">
     <div class="row">
@@ -30,8 +28,13 @@
         <% end %>
       </div>
       <% if user_signed_in? && !current_user.is_doctor %>
-      <%= link_to "Generate Link", result_links_path(@result) %>
-      <%= link_to "Delete this result!", result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+        <%= link_to result_links_path(@result), class: "btn btn-primary me-3" do %>
+        <%= icon('fa-duotone', 'link') %> Share Result
+        <% end %>
+
+        <%= link_to result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+        <%= icon('fa-duotone', 'trash') %> Delete
+        <%end%>
       <% end %>
     </div>
   </div>
