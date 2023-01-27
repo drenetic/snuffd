@@ -88,13 +88,10 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find(params[:id])
-    if current_user == @result.user || current_user == @result.doctor
+    if current_user == @result.doctor
       @result.destroy
-        if current_user == @result.user
-          redirect_to results_path, notice: 'Result was successfully destroyed.'
-        elsif current_user == @result.doctor
-          # redirect to the current patients results
-        end
+      patient = User.find(@result.user_id)
+      redirect_to results_patient_path(patient)
     else
       render 'errors/access_denied'
     end
