@@ -54,6 +54,11 @@
         <%= link_to links_path, class: "nav-link text-nowrap" do %>
         <%= icon('fa-duotone', 'link')%> My Shared Links
         <% end %>
+
+        <%= link_to secure_token_path, class: "nav-link text-nowrap", data: { turbo_frame: "remote_modal" } do %>
+        <%= icon('fa-duotone', 'shield-keyhole')%> Generate Token
+        <% end %>
+
       </div>
 
       <% end %>
