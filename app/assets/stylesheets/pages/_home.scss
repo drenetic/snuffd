@@ -25,6 +25,63 @@ body{
 	background: #fafafa;
 }
 
+.gray-800 {
+  color: $gray-800;
+}
+
+.gray-900 {
+  color: $gray-900;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text {
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.gradient-background {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  border: $pink-500
+}
+
+.gradient-background:hover {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  border: $pink-500
+}
+
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.transform {
+  transform: scale(1);
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+.border-radius-375 {
+  border-radius: 0.375rem;
+}
+
+.pink-500 {
+  color: $pink-500;
+}
+
+.orange-500 {
+  color: $orange-500;
+}
+
+.red-500 {
+  color: $red-500;
+}
+
 .warning-box {
   background-color: rgba(255, 213, 121, 0.5);
   border-radius: 2px;
