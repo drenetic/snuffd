@@ -16,12 +16,13 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :nickname, presence: true, uniqueness: false
+  validates :date_of_birth, presence: true
   validate :patient_must_be_of_age
 
   def patient_must_be_of_age
-   aoc = 18.years.ago
+   aoc = 17.years.ago
 
-    if date_of_birth.after? aoc
+    if !date_of_birth.blank? and date_of_birth.after? aoc
       errors.add(:date_of_birth, "must equal age of consent.")
     end
   end
