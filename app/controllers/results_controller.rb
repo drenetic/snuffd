@@ -32,19 +32,28 @@ class ResultsController < ApplicationController
         results_infection = @result.results_infections.new(infection_id: infection_id)
         results_infection.start_date = @result.test_date
         results_infection.end_date = results_infection.start_date + Infection.find(infection_id.to_i).duration.days
+
+      if !params[:status].present?
+        redirect_to new_result_path, notice: "No infection status is selected"
+      else
         params[:status].each do |status|
           items = status.split(" ")
           if infection_id == items[1]
             results_infection.status = items[0]
           end
         end
+      end
 
+      if !params[:is_treated].present?
+        redirect_to new_result_path, notice: "No treatment status is selected"
+      else
         params[:is_treated].each do |is_treated|
           items = is_treated.split(" ")
           if infection_id == items[1]
             results_infection.is_treated = items[0]
           end
         end
+      end
 
         results_infection.save
       end
