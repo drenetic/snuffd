@@ -1,7 +1,7 @@
 <div class="container">
   <div class="mb-3 h2">Let's get started</div>
 
-  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),
+  <%= simple_form_for(resource, as: resource_name, url: users_sign_up_path,
       data: { turbo: :false, controller: 'registration' } ) do |f| %>
   <%= f.error_notification %>
 
