@@ -1,4 +1,6 @@
 require 'securerandom'
+require 'active_support/all'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,6 +16,16 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :nickname, presence: true, uniqueness: false
+  validate :patient_must_be_of_age
+
+  def patient_must_be_of_age
+   aoc = 18.years.ago
+
+    if date_of_birth.after? aoc
+      errors.add(:date_of_birth, "must equal age of consent.")
+    end
+  end
+
 
   def article_params
     params.require(:user).permit(avatars: [])
