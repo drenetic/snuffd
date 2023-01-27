@@ -1,11 +1,18 @@
 <div class="px-4 pt-5 mt-5 text-center">
-  <h1 class="display-1 fw-bold">Safe is <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
+  <h1 class="display-1 fw-bold logo">Safe is <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
   <div class="col-lg-6 mx-auto" >
     <p class="gray-800 lead mb-4">High fives, not STIs. Keep your sexual health in check.</p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-    <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 mt-sm-2 mb-sm-2 border-radius-375 transition duration-300 ease-in-out transform hover:scale-105 gradient-background gradient-background:hover" do %>
+    <% if user_signed_in? && current_user.is_doctor == false %>
+      <p>Welcome back, <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %><br>
+      Your next test is due: ...</p>
+      <% elsif user_signed_in? && current_user.is_doctor == true %>
+      <p>Welcome back, Dr. <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></p>
+      <% else %>
+      <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 mt-sm-2 mb-sm-2 border-radius-375 transition duration-300 ease-in-out transform hover:scale-105 gradient-background gradient-background:hover" do %>
         Join now
-        <%end%>
+        <% end %>
+    <% end %>
     </div>
   </div>
 
