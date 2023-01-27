@@ -80,4 +80,10 @@ body{
 
 .red-500 {
   color: $red-500;
+.warning-box {
+  background-color: rgba(255, 213, 121, 0.5);
+  border-radius: 2px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip:    padding;
+  background-clip:         padding-box;
 }

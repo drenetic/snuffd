@@ -1,0 +1,54 @@
+<%= turbo_frame_tag "remote_modal" do %>
+
+<div class="modal fade" id="" tabindex="-1" aria-labelledby="newItemRemoteModalLabel" aria-hidden="true"
+  data-controller="remote-modal" data-action="turbo:before-render@document->remote-modal#hideBeforeRender">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Patient Association Code</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body remote_modal_body" id="remote_modal_body">
+        <div class="container mb-3">
+          <p class="h6"><strong>What is this?</strong></p>
+          <p>In order for a health professional to load your results on to your profile, they require a patient's token
+            and matching date of birth. Your code is unique to you, randomly generated and can only be used once before
+            it expires.</p>
+          <div class="warning-box ps-2">
+            <p><small><%= icon('fa-duotone', 'circle-pause') %> Wait for your result to be created before creating a new
+                code.</small></p>
+          </div>
+        </div>
+
+        <table class="table mb-3">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Token Code</th>
+              <th scope="col">Date of Birth</th>
+              <th scope="col">Expires in</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <td scope="row"><%= icon('fa-duotone', 'lock') %></td>
+            <td class="align-items-center" style="vertical-align: middle;">
+              <h5 class="mb-0"><strong><%= @user.secure_code.split('').join(' ') %></strong></h5>
+            </td>
+            <td><%= @user.date_of_birth.strftime("%m/%d/%Y") %></td>
+            <td><%= distance_of_time_in_words(@user.code_expiration_date, DateTime.now.getlocal) %></td>
+            </tr>
+          </tbody>
+        </table>
+        <small class="text-muted"><span class="badge bg-warning">Note</span> Only share this information with your
+          health professional.</small>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>

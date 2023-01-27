@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post 'users/sign_up', to: 'devise/registrations#create'
+    get 'users/token', to: 'results#generate_token', as: 'secure_token'
   end
 
   devise_for :users
