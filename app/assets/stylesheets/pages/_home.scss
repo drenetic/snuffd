@@ -24,3 +24,40 @@ body{
 	font-weight: normal;
 	background: #fafafa;
 }
+
+.gray-800 {
+  color: $gray-800;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text {
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.gradient-background {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  border: linear-gradient(to right, $pink-500 , $orange-500);
+}
+
+.gradient-background:hover {
+  background-image: linear-gradient(to right, $pink-500 , $orange-500);
+  border: linear-gradient(to right, $pink-500 , $orange-500);
+}
+
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.transform {
+  transform: scale(1);
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
