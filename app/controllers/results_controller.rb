@@ -26,7 +26,7 @@ class ResultsController < ApplicationController
     @result.user_id = @patient.id
     @result.doctor_id = @doctor.id
     if !params[:infection_ids].present?
-      redirect_to new_result_path, notice: "No infections selected"
+      redirect_to new_result_path, alert: "No infections selected"
     elsif @result.save && params[:infection_ids].present?
       params[:infection_ids].each do |infection_id|
         results_infection = @result.results_infections.new(infection_id: infection_id)
@@ -34,7 +34,7 @@ class ResultsController < ApplicationController
         results_infection.end_date = results_infection.start_date + Infection.find(infection_id.to_i).duration.days
 
       if !params[:status].present?
-        redirect_to new_result_path, notice: "No infection status is selected"
+        redirect_to new_result_path, alert: "No infection status is selected"
       else
         params[:status].each do |status|
           items = status.split(" ")
@@ -45,7 +45,7 @@ class ResultsController < ApplicationController
       end
 
       if !params[:is_treated].present?
-        redirect_to new_result_path, notice: "No treatment status is selected"
+        redirect_to new_result_path, alert: "No treatment status is selected"
       else
         params[:is_treated].each do |is_treated|
           items = is_treated.split(" ")
@@ -115,7 +115,7 @@ class ResultsController < ApplicationController
     @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
     @doctor = current_user
     if @patient.nil?
-      redirect_to new_result_path, notice: "Patient association is invalid."
+      redirect_to new_result_path, alert: "Patient association is invalid."
     else
       create
       @patient.generate_secure_code
