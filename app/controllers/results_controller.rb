@@ -110,7 +110,7 @@ class ResultsController < ApplicationController
   end
 
   def validate
-    secure_code = params[:secure_code]
+    secure_code = params[:secure_code].gsub(/\s+/, "")
     date_of_birth = params[:date_of_birth]
     @patient = User.find_by(secure_code: secure_code, date_of_birth: date_of_birth)
     @doctor = current_user
