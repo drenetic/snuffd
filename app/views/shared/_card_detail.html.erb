@@ -1,6 +1,7 @@
 <% progress = ((DateTime.now.getlocal.to_date - result.test_date.to_date).to_f / (result.next_test_date.to_date - result.test_date.to_date).to_f) * 100 %>
 <% days_remain = (result.next_test_date.to_date - DateTime.now.getlocal.to_date).to_i %>
 
+
 <div class="card p-3 mb-3">
 
   <!-- Header content -->
@@ -11,7 +12,7 @@
           style="--fa-primary-color: orangered;"></i> <%end%> </div>
       <div class="ms-2 c-details">
         <h6 class="mb-0"> <%= result.user.first_name%> </h6>
-        <span><%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
+        <span>Tested <%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
       </div>
     </div>
     <div class="badge"> <span>Result</span> </div>
@@ -36,7 +37,7 @@
   <!-- Infection details -->
 
   <div class="mt-5 align-content-top">
-    <h5 class="heading">Infections</h5>
+    <h5 class="heading">Result Details</h5>
     <div>
 
       <table class="table">
@@ -53,12 +54,44 @@
           <tr>
 
             <h6>
-              <th scope="row"><%= icon('fa-duotone', 'square-virus') %></th>
-              <td><a href="#" data-bs-toggle="tooltip"
-                  data-bs-title="<%= Infection.find(results_infection.infection_id).description %>p">
-                  <%= Infection.find(results_infection.infection_id).name.gsub("_", " ") %></a></td>
-              <td><%= results_infection.status.capitalize %></td>
-              <td> <%= results_infection.is_treated ? icon('fa-duotone', 'check') : icon('fa-duotone', 'face-weary') %>
+              <th scope="row"><%= icon('fa-light', 'square-virus') %></th>
+              <td>
+                <%= Infection.find(results_infection.infection_id).name.gsub("_", " ") %></td>
+              <td>
+                <%= case results_infection.status.capitalize
+                when "Positive"
+                  "Detected"
+                when "Negative"
+                  "Not Detected"
+                else
+                  ""
+                end %>
+              </td>
+              <td> <%=
+
+
+    case results_infection.infection_id
+      when 1
+        icon('fa-duotone', 'pills', class: 'me-2') + "Curable, Treatment available"
+      when 2
+        icon('fa-duotone', 'pills', class: 'me-2') + "Curable, Treatment available"
+      when 3
+        icon('fa-regular', 'syringe', class: 'me-2') + "Incurable, Vaccine-preventable"
+      when 4
+        icon('fa-duotone', 'pills', class: 'me-2') + "Curable, Treatment available"
+      when 5
+        icon('fa-duotone', 'pills', class: 'me-2') + "Curable, Treatment available"
+      when 6
+        icon('fa-regular', 'pills', class: 'me-2') +  "Incurable, Treatment available"
+      when 7
+        icon('fa-regular', 'syringe', class: 'me-2') + "Incurable, Vaccine-preventable"
+      when 8
+        icon('fa-regular', 'syringe', class: 'me-2') + "Incurable, Vaccine-preventable"
+      else
+        ""
+    end
+
+    %>
               </td>
           </tr>
           <% end %>
@@ -67,26 +100,45 @@
     </div>
 
 
+
+
+
+
     <!-- Treatment progress details -->
     <div class="mt-5">
       <div class="progress">
         <div class="progress-bar" role="progressbar" style="width: <%= progress >= 100 ? 100 : progress %>%"
           aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <div class="mt-3"> <span class="text1"><% if days_remain >= 0 %><i class="fa-duotone fa-circle-pause"></i>
+      <div class="mt-3"> <span
+          class="text1"><% if days_remain >= 0 %><%= icon('fa-duotone', 'circle-pause', class: 'me-1') %>
           <%= pluralize(days_remain, 'day')  %> <span class="text2"> left in your treatment window. </span> <%else%>
           Love is in the air! <i class="fa-regular fa-face-kiss-wink-heart"></i> <span class="text2"> Play safe.</span>
           <% end%> </span>
       </div>
     </div>
 
+    <!-- Result controls  -->
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-row align-items-center">
+        <div class="mt-2"></div>
+        <div class="ms-2 c-details">
+          <h6 class="mb-0"></h6>
+        </div>
+      </div>
+      <div class="mt-2">
+        <% if user_signed_in? && !current_user.is_doctor %>
+        <%= link_to result_links_path(@result), class: "btn btn-primary me-3" do %>
+        <%= icon('fa-duotone', 'link') %> Share Result
+        <% end %>
+
+        <%= link_to result_path(@result), class: "btn btn-danger text-white" ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+        <%= icon('fa-duotone', 'trash') %> Delete
+        <%end%>
+        <% end %>
+      </div>
+    </div>
 
 
   </div>
 </div>
-
-
-<script>
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-</script>
