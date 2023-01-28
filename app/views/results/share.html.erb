@@ -1,25 +1,12 @@
-
-<h1>STI Results for #<%= @result.id %></h1>
-
-<ul>
-  <% if @results_infections.empty? %>
-  <p>No infections have been assigned to this result.</p>
-  <p>Bonk responsibly.</p>
-  <% else %>
-  <% @results_infections.each do |results_infection| %>
-    <li>
-      <%= results_infection.infection.name.gsub("_", " ") %>:
-      <%= results_infection.status %>
-      <% if results_infection.is_treated %>
-        (treated)
-      <% end %>
-    </li>
-  <% end %>
-  <% end %>
-  <%= @result.links.last.expiration_date - Time.now %>
-</ul>
-
-<div data-controller="copy-link">
-  <input class="form-text"  data-copy-link-target="source" type="text" value=<%= @link  %> readonly>
-  <button  data-action="click->copy-link#copy">Copy URL</button>
+<div class="mt-5 mb-3">
+  <div class="row">
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1">
+      <%= render partial: "shared/card_detail_share", locals: {result: @result} %>
+      <div>This result sharing will expire in
+      <span data-controller="timer" data-timer-expiration="<%= @result.links.last.expiration_date %>">
+      <span data-target="timer.display"></span>
+      </span>
+      </div>
+    </div>
+  </div>
 </div>
