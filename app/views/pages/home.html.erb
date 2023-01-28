@@ -9,7 +9,7 @@
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
     <% if user_signed_in? && current_user.is_doctor == false %>
       <h3 class="gray-900">Welcome back, <%= current_user.first_name.capitalize %><br>
-      Your next test is due <%= @last_result.next_test_date ? "on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "... who knows when?"%></h3>
+      <%= @last_result.next_test_date ? "Your next test is due on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "Looks like it's been awhile, maybe a test is due?"%></h3>
       <% elsif user_signed_in? && current_user.is_doctor == true %>
       <h3 class="gray-900">Welcome back, Dr. <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h3>
       <% else %>
