@@ -64,46 +64,24 @@ puts "
   ============================
 "
 
-adam =
-  User.create!(
-    first_name: "Adam",
-    last_name: "D",
-    email: "adam@example.com",
-    nickname: "Drenny",
-    gender: "Man",
-    date_of_birth: "1988-06-12",
-    location: "Melbourne",
-    orientation: "Gay",
-    password: "123456",
-    is_doctor: true
-  )
-adam.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-29_szqvrz.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-adam.save
-
 reuben =
   User.create!(
     first_name: "Reuben",
-    last_name: "F",
-    email: "reuben@example.com",
+    last_name: "Frith",
+    email: "reuben@doctor.com",
     nickname: "Reubs",
     gender: "Man",
-    date_of_birth: "2000-12-12",
+    date_of_birth: "1988-12-12",
     location: "Melbourne",
     orientation: "Straight (heterosexual)",
     password: "123456",
-    is_doctor: false
+    is_doctor: true,
+    provider_number: "XYZ1286BA"
   )
 reuben.avatar.attach(
   io:
     URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791958/Artboards_Diversity_Avatars_by_Netguru-33_cwrlqd.png"
+      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-29_szqvrz.png"
     ),
   filename: "user.png",
   content_type: "image/png"
@@ -113,11 +91,11 @@ reuben.save
 zhenni =
   User.create!(
     first_name: "Zhenni",
-    last_name: "Z",
-    email: "zhenni@example.com",
+    last_name: "Zhou",
+    email: "zhenni@patient.com",
     nickname: "Zen",
     gender: "Woman",
-    date_of_birth: "1988-06-12",
+    date_of_birth: "1988-06-06",
     location: "Melbourne",
     orientation: "Straight (heterosexual)",
     password: "123456",
@@ -136,11 +114,11 @@ zhenni.save
 dimitri =
   User.create!(
     first_name: "Dimitri",
-    last_name: "M",
-    email: "dimitri@example.com",
+    last_name: "Mastrantonis",
+    email: "dimitri@patient.com",
     nickname: "Dims",
     gender: "Man",
-    date_of_birth: "1988-06-12",
+    date_of_birth: "1993-11-04",
     location: "Perth",
     orientation: "Straight (heterosexual)",
     password: "123456",
@@ -156,81 +134,79 @@ dimitri.avatar.attach(
 )
 dimitri.save
 
+adam =
+  User.create!(
+    first_name: "Adam",
+    last_name: "Drenetic",
+    email: "adam@patient.com",
+    nickname: "Drenny",
+    gender: "Man",
+    date_of_birth: "1988-06-12",
+    location: "Melbourne",
+    orientation: "Gay",
+    password: "123456",
+    is_doctor: false
+  )
+adam.avatar.attach(
+  io:
+    URI.open(
+      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
+    ),
+  filename: "user.png",
+  content_type: "image/png"
+)
+adam.save
+
+roberto =
+  User.create!(
+    first_name: "Roberto",
+    last_name: "Costello",
+    email: "rob@patient.com",
+    nickname: "Robo",
+    gender: "Man",
+    date_of_birth: "1988-06-06",
+    location: "Adelaide",
+    orientation: "Straight (heterosexual)",
+    password: "123456",
+    is_doctor: false
+  )
+roberto.avatar.attach(
+  io:
+    URI.open(
+      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
+    ),
+  filename: "user.png",
+  content_type: "image/png"
+)
+roberto.save
+
+john =
+  User.create!(
+    first_name: "John",
+    last_name: "Abrahams",
+    email: "john@patient.com",
+    nickname: "Abs",
+    gender: "Man",
+    date_of_birth: "1988-06-06",
+    location: "Adelaide",
+    orientation: "Gay",
+    password: "123456",
+    is_doctor: false
+  )
+john.avatar.attach(
+  io:
+    URI.open(
+      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
+    ),
+  filename: "user.png",
+  content_type: "image/png"
+)
+john.save
+
+
 puts "
   ============================
   ✅ Main USERS complete.
-  ============================
-"
-
-# Community users
-puts "
-  ============================
-  🌱 Seeding community USERS...
-  ============================
-"
-
-3.times do |user|
-  first_name = Faker::Name.first_name
-  user =
-    User.create!(
-      first_name: first_name,
-      last_name: Faker::Name.last_name,
-      email: Faker::Internet.email(name: first_name),
-      nickname: Faker::Hipster.word,
-      gender: gender.sample,
-      date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 45).to_s,
-      location: Faker::Address.city,
-      orientation: orientation.sample,
-      password: "123456",
-      is_doctor: false
-    )
-  user.avatar.attach(
-    io: URI.open(avatars.sample),
-    filename: "user.png",
-    content_type: "image/png"
-  )
-  user.save
-end
-
-puts "
-  ============================
-  ✅ Community USERS complete.
-  ============================
-"
-
-# Doctors
-puts "
-  ============================
-  🌱 Seeding DOCTORS...
-  ============================
-"
-
-3.times do |doctor|
-  first_name = Faker::Name.first_name
-  doctor =
-    User.create!(
-      first_name: first_name,
-      last_name: Faker::Name.last_name,
-      email: Faker::Internet.email(name: first_name),
-      nickname: Faker::Hipster.word,
-      gender: gender.sample,
-      date_of_birth: Faker::Date.birthday(min_age: 18, max_age: 45).to_s,
-      orientation: orientation.sample,
-      password: "123456",
-      is_doctor: true,
-      provider_number: Faker::Alphanumeric.alphanumeric(number: 8).upcase
-    )
-  doctor.avatar.attach(
-    io: URI.open(avatars.sample),
-    filename: "user.png",
-    content_type: "image/png"
-  )
-  doctor.save
-end
-
-puts "
-  ============================
-  ✅ DOCTORS complete.
   ============================
 "
 
@@ -328,16 +304,47 @@ puts "
   ============================
 "
 
-20.times do |result|
-  test_date = Faker::Date.between(from: 7.days.ago, to: Date.today)
-  result =
-    Result.create!(
-      user_id: User.all.where(is_doctor: false).sample.id,
-      doctor_id: User.all.where(is_doctor: true).sample.id,
-      test_date: test_date.to_s,
-      next_test_date: (test_date + 7).to_s
-    )
-end
+result1 = Result.create!(
+    user_id: dimitri.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2022,3,25),
+    next_test_date: (Date.new(2022,3,25) + 14).to_s
+  )
+
+result2 = Result.create!(
+    user_id: dimitri.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2022,9,10),
+    next_test_date: (Date.new(2022,9,10) + 9).to_s
+  )
+
+result3 = Result.create!(
+    user_id: dimitri.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2023,1,1),
+    next_test_date: (Date.new(2023,1,1) + 7).to_s
+  )
+
+result4 = Result.create!(
+    user_id: roberto.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2022,12,25),
+    next_test_date: (Date.new(2022,12,25) + 14).to_s
+  )
+
+result5 = Result.create!(
+    user_id: adam.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2022,9,12),
+    next_test_date: (Date.new(2022,9,12) + 10).to_s
+  )
+
+result5 = Result.create!(
+    user_id: john.id,
+    doctor_id: reuben.id,
+    test_date: Date.new(2022,5,10),
+    next_test_date: (Date.new(2022,5,10) + 14).to_s
+  )
 
 puts "
   ============================
@@ -351,38 +358,62 @@ puts "
   🌱 Associating RESULTS+INFECTIONS
   ============================
 "
+result = Result.all
+infections = Infection.all
 
-results = Result.all
+result1_infection1a = ResultsInfection.create!(
+  result_id: result1.id,
+  status: "positive",
+  infection_id: gono.id,
+  start_date: result1.test_date,
+  end_date: result1.test_date + gono.duration.days,
+  is_treated: "true"
+)
 
-20.times do |analysis|
-  date = Faker::Date.between(from: 7.days.ago, to: Date.today)
+result1_infection1b = ResultsInfection.create!(
+  result_id: result1.id,
+  status: "negative",
+  infection_id: chlam.id,
+  start_date: result1.test_date,
+  end_date: result1.test_date + chlam.duration.days,
+  is_treated: "false"
+)
 
-  result = results.sample
-  existing_infection_ids = result.results_infections.pluck(:infection_id)
+result2_infection2a = ResultsInfection.create!(
+  result_id: result2.id,
+  status: "positive",
+  infection_id: hepb.id,
+  start_date: result2.test_date,
+  end_date: result2.test_date + hepb.duration.days,
+  is_treated: "true"
+)
 
-  infection_id = Infection.pluck(:id).sample
-  while existing_infection_ids.include?(infection_id)
-    infection_id = Infection.pluck(:id).sample
-  end
+result3_infection3a = ResultsInfection.create!(
+  result_id: result3.id,
+  status: "negative",
+  infection_id: gono.id,
+  start_date: result3.test_date,
+  end_date: result3.test_date + gono.duration.days,
+  is_treated: "false"
+)
 
-  analysis =
-    ResultsInfection.create!(
-      result_id: result.id,
-      infection_id: infection_id,
-      is_treated: [true, false].sample
-    )
+result3_infection3b = ResultsInfection.create!(
+  result_id: result3.id,
+  status: "positive",
+  infection_id: hsv.id,
+  start_date: result3.test_date,
+  end_date: result3.test_date + hsv.duration.days,
+  is_treated: "true"
+)
 
-  if analysis.is_treated?
-    analysis.start_date = date
-    analysis.end_date = date + 7
-    analysis.status = "negative/non-reactive"
-  else
-    analysis.start_date = date + 7
-    analysis.end_date = date + 14
-    analysis.status = "positive/reactive"
-  end
-  analysis.save
-end
+result5_infection5a = ResultsInfection.create!(
+  result_id: result5.id,
+  status: "positive",
+  infection_id: hepc.id,
+  start_date: result5.test_date,
+  end_date: result5.test_date + hepc.duration.days,
+  is_treated: "true"
+)
 
 puts "
   ============================
