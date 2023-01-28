@@ -1,6 +1,9 @@
 <% progress = ((DateTime.now.getlocal.to_date - result.test_date.to_date).to_f / (result.next_test_date.to_date - result.test_date.to_date).to_f) * 100 %>
 <% days_remain = (result.next_test_date.to_date - DateTime.now.getlocal.to_date).to_i %>
-    <div class="card p-3 mb-3">
+
+
+    <div class="card p-3 m-3">
+    <%= link_to "", result_path(result), class:"stretched-link" %>
       <div class="d-flex justify-content-between">
         <div class="d-flex flex-row align-items-center">
           <div class="icon"> <% if progress >= 100 %> <i class="fa-duotone fa-vial-circle-check" style="--fa-primary-color: green;"></i>    </i> <%else%> <i class="fa-duotone fa-vial-virus" style="--fa-primary-color: orange;"></i>  <%end%> </div>
@@ -12,7 +15,7 @@
       <div class="badge"> <span><%= result.id %></span> </div>
       </div>
       <div class="mt-5">
-        <h3 class="heading">STI<br>Check Up</h3>
+        <h5 class="">Tested on <span class="text-muted"><%= result.test_date.strftime("%d %b %Y") %></span></h5>
         <div class="mt-5">
           <div class="progress">
             <div class="progress-bar" role="progressbar" style="width: <%= progress >= 100 ? 100 : progress %>%" aria-valuenow="50" aria-valuemin="0"
