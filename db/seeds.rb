@@ -21,19 +21,6 @@ puts "
 require "open-uri"
 require "faker"
 
-avatars = %w[
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791963/Artboards_Diversity_Avatars_by_Netguru-49_hqecwp.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-02_emimjc.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-16_jbb89p.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-59_khdhli.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-48_wixbci.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-17_asu5y0.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-58_qlue2f.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-15_hihfpx.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-29_szqvrz.png
-  http://res.cloudinary.com/dxco8as6m/image/upload/v1672791961/Artboards_Diversity_Avatars_by_Netguru-28_iv916o.png
-]
-
 gender = [
   "Man",
   "Cis Man",
@@ -78,15 +65,6 @@ reuben =
     is_doctor: true,
     provider_number: "XYZ1286BA"
   )
-reuben.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791962/Artboards_Diversity_Avatars_by_Netguru-29_szqvrz.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-reuben.save
 
 zhenni =
   User.create!(
@@ -101,15 +79,6 @@ zhenni =
     password: "123456",
     is_doctor: false
   )
-zhenni.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-zhenni.save
 
 dimitri =
   User.create!(
@@ -124,15 +93,6 @@ dimitri =
     password: "123456",
     is_doctor: false
   )
-dimitri.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791961/Artboards_Diversity_Avatars_by_Netguru-05_fekwf2.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-dimitri.save
 
 adam =
   User.create!(
@@ -147,15 +107,6 @@ adam =
     password: "123456",
     is_doctor: false
   )
-adam.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-adam.save
 
 roberto =
   User.create!(
@@ -170,15 +121,6 @@ roberto =
     password: "123456",
     is_doctor: false
   )
-roberto.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-roberto.save
 
 john =
   User.create!(
@@ -193,16 +135,6 @@ john =
     password: "123456",
     is_doctor: false
   )
-john.avatar.attach(
-  io:
-    URI.open(
-      "https://res.cloudinary.com/dxco8as6m/image/upload/v1672791959/Artboards_Diversity_Avatars_by_Netguru-19_fqd11r.png"
-    ),
-  filename: "user.png",
-  content_type: "image/png"
-)
-john.save
-
 
 puts "
   ============================
