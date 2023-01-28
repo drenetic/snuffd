@@ -1,94 +1,102 @@
 <div class="px-4 pt-5 mt-5 text-center">
-<% if user_signed_in? %>
-  <h1 class="display-1 fw-bold logo">Hey <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
+  <% if user_signed_in? %>
+  <h1 class="display-1 fw-bold logo">Hey <span class="boujee-text">SEXY</span> <i
+      class="fa-duotone fa-face-smirking yellow-500"></i></h1>
   <% else %>
-  <h1 class="display-1 fw-bold logo">Safe is <span class="boujee-text">SEXY</span> <i class="fa-duotone fa-face-smirking yellow-500"></i></h1>
+  <h1 class="display-1 fw-bold logo">Safe is <span class="boujee-text">SEXY</span> <i
+      class="fa-duotone fa-face-smirking yellow-500"></i></h1>
   <% end %>
-  <div class="col-lg-6 mx-auto" >
+  <div class="col-lg-6 mx-auto">
     <p class="gray-800 lead mb-4">High fives, not STIs. Keep your sexual health in check.</p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-    <% if user_signed_in? && current_user.is_doctor == false %>
+      <% if user_signed_in? && current_user.is_doctor == false %>
       <h3 class="gray-900">Welcome back, <%= current_user.first_name.capitalize %><br>
-      <%= @last_result.next_test_date ? "Your next test is due on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "Looks like it's been awhile, maybe a test is due?"%></h3>
+        <%= @last_result.next_test_date ? "Your next test is due on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "When were you last checked?"%>
+      </h3>
       <% elsif user_signed_in? && current_user.is_doctor == true %>
-      <h3 class="gray-900">Welcome back, Dr. <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></h3>
+      <h3 class="gray-900">Welcome back, Dr. <%= current_user.first_name.capitalize %>
+        <%= current_user.last_name.capitalize %></h3>
       <% else %>
       <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 mt-sm-2 mb-sm-2 border-radius-375 transition duration-300 ease-in-out transform hover:scale-105 gradient-background gradient-background:hover" do %>
-        Join now
-        <% end %>
-    <% end %>
+      Join now
+      <% end %>
+      <% end %>
     </div>
   </div>
 
-    <div class="row justify-content-center">
-      <%# Card 2 %>
-      <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
-        <i class="display-1 fa-duotone fa-house-medical red-500 mb-3"></i>
-        <h3 class="gray-900 fw-bold">Doctor-approved</h2>
+  <div class="row justify-content-center">
+    <%# Card 2 %>
+    <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
+      <i class="display-1 fa-duotone fa-house-medical red-500 mb-3"></i>
+      <h3 class="gray-900 fw-bold">Doctor-approved</h2>
         <p class="gray-800">
           Trusted by health professionals.<br>
           Feel confident in the accuracy and reliability in the results.
         </p>
-      </div>
+    </div>
 
-      <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
-        <i class="display-1 fa-sharp fa-duotone fa-hand-holding-hand orange-500 mb-3"></i>
-        <h3 class="gray-900 fw-bold">Shareable</h2>
+    <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
+      <i class="display-1 fa-sharp fa-duotone fa-hand-holding-hand orange-500 mb-3"></i>
+      <h3 class="gray-900 fw-bold">Shareable</h2>
         <p class="gray-800">
           Get in the sheets with peeps.<br> Securely share your results and make the awkward awesome.
         </p>
-      </div>
+    </div>
 
-      <%# Card 1 %>
-      <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
-        <i class="display-1 card-title fa-duotone fa-peach red-500 mb-3"></i>
-        <h3 class="gray-900 fw-bold">Peace of mind</h2>
+    <%# Card 1 %>
+    <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
+      <i class="display-1 card-title fa-duotone fa-peach red-500 mb-3"></i>
+      <h3 class="gray-900 fw-bold">Peace of mind</h2>
         <p class="gray-800">
           Track your sexual health easily.<br>
           Get test results uploaded by doctors, all in one place.
         </p>
-      </div>
-
-      <div class="col-12 col-sm-12 col-md-9 card border-radius-375 p-3 m-3" id="facts-display">
-        <p class="gray-800" id="fact-string">
-         More than 1 million sexually transmitted infections (STIs) are acquired every day worldwide, the majority of which are asymptomatic (WHO)
-        </p>
-      </div>
-
     </div>
+
+    <div class="col-12 col-sm-12 col-md-9 card border-radius-375 p-3 m-3" id="facts-display">
+      <small id="fact-string" class="text-wrap">
+        More than 1 million sexually transmitted infections (STIs) are acquired every day worldwide, the majority of
+        which are asymptomatic.
+      </small>
+    </div>
+    <figcaption class="blockquote-footer">
+      Sources <cite title="Source Title">Kirby Institue (UNSW), World Health Organisation (WHO) </cite>
+    </figcaption>
+  </div>
 
 
 
 </div>
 
-  <script defer>
+<script defer>
+  let facts = [
+    "In 2021 there were 86,916 diagnoses of chlamydia, 26,577 of gonorrhoea and 5,570 of infectious syphilis in Australia.",
+    "In Australia, there continue to be high rates of chlamydia, gonorrhoea and syphilis diagnosed among gay and bisexual men living in major cities.",
+    "In Australia, more than one in 25 young people aged between 15-29 in Australia had chlamydia during 2021 but less than a third of those young people received a chlamydia diagnosis.",
+    "Each year there are an estimated 374 million new infections with 1 of 4 curable STIs: chlamydia, gonorrhoea, syphilis and trichomoniasis.",
+    "More than 500 million people 15–49 years are estimated to have a genital infection with herpes simplex virus (HSV or herpes).",
+    "Human papillomavirus (HPV) infection is associated with over 311 000 cervical cancer deaths each year.",
+    "Almost 1 million pregnant women were estimated to be infected with syphilis in 2016, resulting in over 350 000 adverse birth outcomes.",
+    "STIs have a direct impact on sexual and reproductive health through stigmatization, infertility, cancers and pregnancy complications and can increase the risk of HIV.",
+    "Drug resistance is a major threat to reducing the burden of STIs worldwide.",
+    "More than 30 different bacteria, viruses and parasites are known to be transmitted through sexual contact, including vaginal, anal and oral sex.",
+    "In 2020, WHO estimated 374 million new infections with 1 of 4 STIs: chlamydia (129 million), gonorrhoea (82 million), syphilis (7.1 million) and trichomoniasis (156 million).",
+    "More than 490 million people were estimated to be living with genital herpes in 2016, and an estimated 300 million women have an HPV infection, the primary cause of cervical cancer and anal cancer among men who have sex with men."
+  ];
 
-    let facts = ["In 2021 there were 86,916 diagnoses of chlamydia, 26,577 of gonorrhoea and 5,570 of infectious syphilis in Australia (Kirby Institute, UNSW)",
-                "In Australia, there continue to be high rates of chlamydia, gonorrhoea and syphilis diagnosed among gay and bisexual men living in major cities (Kirby Institute, UNSW)",
-                "In Australia, more than one in 25 young people aged between 15-29 in Australia had chlamydia during 2021 but less than a third of those young people received a chlamydia diagnosis",
-                "Each year there are an estimated 374 million new infections with 1 of 4 curable STIs: chlamydia, gonorrhoea, syphilis and trichomoniasis (WHO)",
-                "More than 500 million people 15–49 years are estimated to have a genital infection with herpes simplex virus (HSV or herpes)(WHO)",
-                "Human papillomavirus (HPV) infection is associated with over 311 000 cervical cancer deaths each year(WHO)",
-                "Almost 1 million pregnant women were estimated to be infected with syphilis in 2016, resulting in over 350 000 adverse birth outcomes(WHO)",
-                "STIs have a direct impact on sexual and reproductive health through stigmatization, infertility, cancers and pregnancy complications and can increase the risk of HIV(WHO)",
-                "Drug resistance is a major threat to reducing the burden of STIs worldwide(WHO)",
-                "More than 30 different bacteria, viruses and parasites are known to be transmitted through sexual contact, including vaginal, anal and oral sex (WHO)",
-                "In 2020, WHO estimated 374 million new infections with 1 of 4 STIs: chlamydia (129 million), gonorrhoea (82 million), syphilis (7.1 million) and trichomoniasis (156 million) (WHO)",
-                "More than 490 million people were estimated to be living with genital herpes in 2016, and an estimated 300 million women have an HPV infection, the primary cause of cervical cancer and anal cancer among men who have sex with men(WHO)"];
+  // function shuffleArray(array) {
+  //     return array.sort(() => Math.random() - 0.5);
+  //   }
+  // function randomizeFacts () {
+  //   shuffleArray(facts);
+  //   for (let i = 0; i < facts.length ; i++ ) {
+  //     let fact = document.getElementById("fact-string").innerHTML = facts[i];
+  //   // let factsIndex = (factsIndex + 1) % facts.length;
+  //   }
+  // }
+  // setInterval(randomizeFacts(), 1000);
 
-    // function shuffleArray(array) {
-    //     return array.sort(() => Math.random() - 0.5);
-    //   }
-    // function randomizeFacts () {
-    //   shuffleArray(facts);
-    //   for (let i = 0; i < facts.length ; i++ ) {
-    //     let fact = document.getElementById("fact-string").innerHTML = facts[i];
-    //   // let factsIndex = (factsIndex + 1) % facts.length;
-    //   }
-    // }
-    // setInterval(randomizeFacts(), 1000);
-
-     let currentIndex = 0;
+  let currentIndex = 0;
 
   function displayFact() {
     document.getElementById("fact-string").innerHTML = facts[currentIndex];
@@ -98,5 +106,5 @@
     }
   }
 
-  setInterval(displayFact, 3500);
-  </script>
+  setInterval(displayFact, 4500);
+</script>

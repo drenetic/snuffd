@@ -9,13 +9,13 @@
           <div class="icon"> <% if progress >= 100 %> <i class="fa-duotone fa-vial-circle-check" style="--fa-primary-color: green;"></i>    </i> <%else%> <i class="fa-duotone fa-vial-virus" style="--fa-primary-color: orange;"></i>  <%end%> </div>
           <div class="ms-2 c-details">
             <h6 class="mb-0"> <%= result.user.first_name%> </h6>
-            <span><%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
+            <span>Tested <%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
           </div>
         </div>
       <div class="badge"> <span><%= result.id %></span> </div>
       </div>
       <div class="mt-5">
-        <h5 class="">Tested on <span class="text-muted"><%= result.test_date.strftime("%d %b %Y") %></span></h5>
+        <h5 class=""><span class="text-muted"><%= result.test_date.strftime("%d %b %Y") %></span></h5>
         <div class="mt-5">
           <div class="progress">
             <div class="progress-bar" role="progressbar" style="width: <%= progress >= 100 ? 100 : progress %>%" aria-valuenow="50" aria-valuemin="0"
