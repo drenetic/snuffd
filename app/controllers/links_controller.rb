@@ -25,7 +25,7 @@ class LinksController < ApplicationController
         expiration_date: expiration_date
       )
     if link.save
-      redirect_to share_results_url+"?uuid="+link.uuid, allow_other_host: true
+      redirect_to share_results_path+"?uuid="+link.uuid, allow_other_host: true
     else
       render plain: "Link generation failed"
     end
