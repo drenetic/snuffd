@@ -1,22 +1,40 @@
-<h1>Links#show</h1>
-<p>Find me in app/views/links/show.html.erb</p>
 
-<% @links.each do |link| %>
-  <%= link_to "This is for #{link.id}", share_results_url+"?uuid="+link.uuid %>
-  <p>This link will expire at <%= link.expiration_date %></p>
 
-  <p><b>Link ID </b><%= link.id %></p>
-  <p><b>Link UUID </b><%= link.uuid %></p>
-  <p><b>Link Result </b><%= link.result.id %></p>
-  <p><b>Link User </b><%= link.result.user.nickname %></p>
-  <p><b>Link Status </b><%= link.is_active %></p>
-  <p><b>Link Expiry </b><%= link.expiration_date %></p>
+<h1><%= @links.empty? ? "You've got no active links" : "Your active links" %></h1>
+<p><%= @links.empty? ? "Go to a result to generate a shareable link" : "" %></p>
 
-  <h1>
-    <div data-controller="timer" data-timer-expiration="<%= link.expiration_date %>">
-      <span>This Link will expire in</span>
-      <span data-target="timer.display"></span>
-    </div>
-  </h1>
-  <br>
-<% end %>
+<div class="d-flex flex-wrap">
+<div class="card w-75">
+  <div class="table-responsive p-3">
+    <table class="table">
+    <thead>
+        <tr>
+          <th scope="col">Your Result</th>
+          <th scope="col">What they will see</th>
+          <th scope="col">Expires in</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+      <% @links.each do |link| %>
+        <tr>
+          <td><%= link_to "Result #{link.result.id}", result_path(Result.find(link.result.id)) %></th>
+          <td><%= link_to "Share #{link.result.id}", share_results_url+"?uuid="+link.uuid %></td>
+          <td>
+            <span data-controller="timer" data-timer-expiration="<%= link.expiration_date %>">
+              <span data-target="timer.display"></span>
+            </span>
+          </td>
+          <td>
+            <div data-controller="copy-link">
+              <input class="form-text hidden"  data-copy-link-target="source" type="text" value=<%= share_results_url+"?uuid="+link.uuid  %> readonly>
+              <button class="btn btn-primary border-radius-375 transition duration-300 ease-in-out transform hover:scale-105"  data-action="click->copy-link#copy">Copy URL</button>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
