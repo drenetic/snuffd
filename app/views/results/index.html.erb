@@ -1,31 +1,35 @@
 <% if current_user.is_doctor %>
 
-  <input type="text" id="search-input" placeholder="Patient Search.." class="mb-3">
-  <div id="patient-list">
-    <% @patients.each do |patient| %>
-      <p>
-         <i class="fa-duotone fa-folder-medical"></i> <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
-      </p>
-    <% end %>
-  </div>
+<input type="text" id="search-input" placeholder="Patient Search.." class="mb-3">
+<div id="patient-list">
+  <% @patients.each do |patient| %>
+  <p>
+    <i class="fa-duotone fa-folder-medical"></i>
+    <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
+  </p>
+  <% end %>
+</div>
 
 <% else %>
 
-  <div class="container">
-  <div class="row">
-    <% @results.order("test_date desc").each do |result| %>
+<h2>My Results</h2>
+
+<div class="mt-5 mb-3">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-4">
+    <% @results.order("id desc, test_date desc").each do |result| %>
     <%= render partial: "shared/card", locals: {result: result} %>
     <% end %>
-    </div>
   </div>
+</div>
 
 <% end %>
+
 
 <script>
   var searchInput = document.getElementById("search-input");
   var list = document.getElementById("patient-list");
 
-  searchInput.addEventListener("keyup", function() {
+  searchInput.addEventListener("keyup", function () {
     var searchValue = this.value.toLowerCase();
     var listItems = list.getElementsByTagName("p");
 
