@@ -1,25 +1,92 @@
 <% progress = ((DateTime.now.getlocal.to_date - result.test_date.to_date).to_f / (result.next_test_date.to_date - result.test_date.to_date).to_f) * 100 %>
 <% days_remain = (result.next_test_date.to_date - DateTime.now.getlocal.to_date).to_i %>
-    <div class="card p-3 mb-2">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex flex-row align-items-center">
-          <div class="icon"> <% if progress >= 100 %> <i class="fa-duotone fa-vial-circle-check" style="--fa-primary-color: limegreen;"></i>    </i> <%else%> <i class="fa-duotone fa-vial-virus" style="--fa-primary-color: orangered;"></i>  <%end%> </div>
-          <div class="ms-2 c-details">
-            <h6 class="mb-0"> <%= result.user.first_name%> </h6>
-            <span><%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
-          </div>
-        </div>
-        <div class="badge"> <span>Result</span> </div>
-      </div>
-      <div class="mt-5">
-        <h3 class="heading">STI<br>Check Up</h3>
-        <div class="mt-5">
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: <%= progress >= 100 ? 100 : progress %>%" aria-valuenow="50" aria-valuemin="0"
-              aria-valuemax="100"></div>
-          </div>
-          <div class="mt-3"> <span class="text1"><% if days_remain >= 0 %><i class="fa-duotone fa-circle-pause"></i> <%= pluralize(days_remain, 'day')  %> <span class="text2"> left in your treatment window. </span> <%else%> Love is in the air! <i class="fa-regular fa-face-kiss-wink-heart"></i> <span class="text2"> Play safe.</span> <% end%> </span>
-          </div>
-        </div>
+
+<div class="card p-3 mb-3">
+
+  <!-- Header content -->
+  <div class="d-flex justify-content-between">
+    <div class="d-flex flex-row align-items-center">
+      <div class="icon"> <% if progress >= 100 %> <i class="fa-duotone fa-vial-circle-check"
+          style="--fa-primary-color: limegreen;"></i> </i> <%else%> <i class="fa-duotone fa-vial-virus"
+          style="--fa-primary-color: orangered;"></i> <%end%> </div>
+      <div class="ms-2 c-details">
+        <h6 class="mb-0"> <%= result.user.first_name%> </h6>
+        <span><%= distance_of_time_in_words(result.test_date, DateTime.now.getlocal) %> ago</span>
       </div>
     </div>
+    <div class="badge"> <span>Result</span> </div>
+  </div>
+
+
+  <!-- Doctor details -->
+  <div class="d-flex justify-content-between">
+    <div class="d-flex flex-row align-items-center">
+      <div class="mt-2 border-2 border-bottom border-lightgray"><small class="text-muted"><strong>Treated by
+          </strong>Dr. <%= result.doctor.first_name %> <%= result.doctor.last_name %></small></div>
+      <div class="ms-2 c-details">
+        <h6 class="mb-0"></h6>
+      </div>
+    </div>
+    <div class="mt-2"><small class="text-muted"><strong>Provider ID</strong>
+        <%= result.doctor.provider_number %></small></div>
+  </div>
+
+
+
+  <!-- Infection details -->
+
+  <div class="mt-5 align-content-top">
+    <h5 class="heading">Infections</h5>
+    <div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Result</th>
+            <th scope="col">Treatment Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @result.results_infections.each do |results_infection|  %>
+          <tr>
+
+            <h6>
+              <th scope="row"><%= icon('fa-duotone', 'square-virus') %></th>
+              <td><a href="#" data-bs-toggle="tooltip"
+                  data-bs-title="<%= Infection.find(results_infection.infection_id).description %>p">
+                  <%= Infection.find(results_infection.infection_id).name.gsub("_", " ") %></a></td>
+              <td><%= results_infection.status.capitalize %></td>
+              <td> <%= results_infection.is_treated ? icon('fa-duotone', 'check') : icon('fa-duotone', 'face-weary') %>
+              </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Treatment progress details -->
+    <div class="mt-5">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= progress >= 100 ? 100 : progress %>%"
+          aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="mt-3"> <span class="text1"><% if days_remain >= 0 %><i class="fa-duotone fa-circle-pause"></i>
+          <%= pluralize(days_remain, 'day')  %> <span class="text2"> left in your treatment window. </span> <%else%>
+          Love is in the air! <i class="fa-regular fa-face-kiss-wink-heart"></i> <span class="text2"> Play safe.</span>
+          <% end%> </span>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<script>
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
