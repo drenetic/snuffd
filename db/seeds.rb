@@ -367,7 +367,7 @@ result1_infection1a = ResultsInfection.create!(
   infection_id: gono.id,
   start_date: result1.test_date,
   end_date: result1.test_date + gono.duration.days,
-  is_treated: "true"
+  is_treated: true
 )
 
 result1_infection1b = ResultsInfection.create!(
@@ -376,7 +376,7 @@ result1_infection1b = ResultsInfection.create!(
   infection_id: chlam.id,
   start_date: result1.test_date,
   end_date: result1.test_date + chlam.duration.days,
-  is_treated: "false"
+  is_treated: false
 )
 
 result2_infection2a = ResultsInfection.create!(
@@ -385,7 +385,7 @@ result2_infection2a = ResultsInfection.create!(
   infection_id: hepb.id,
   start_date: result2.test_date,
   end_date: result2.test_date + hepb.duration.days,
-  is_treated: "true"
+  is_treated: true
 )
 
 result3_infection3a = ResultsInfection.create!(
@@ -394,7 +394,7 @@ result3_infection3a = ResultsInfection.create!(
   infection_id: gono.id,
   start_date: result3.test_date,
   end_date: result3.test_date + gono.duration.days,
-  is_treated: "false"
+  is_treated: false
 )
 
 result3_infection3b = ResultsInfection.create!(
@@ -403,7 +403,7 @@ result3_infection3b = ResultsInfection.create!(
   infection_id: hsv.id,
   start_date: result3.test_date,
   end_date: result3.test_date + hsv.duration.days,
-  is_treated: "true"
+  is_treated: true
 )
 
 result5_infection5a = ResultsInfection.create!(
@@ -412,7 +412,7 @@ result5_infection5a = ResultsInfection.create!(
   infection_id: hepc.id,
   start_date: result5.test_date,
   end_date: result5.test_date + hepc.duration.days,
-  is_treated: "true"
+  is_treated: true
 )
 
 puts "

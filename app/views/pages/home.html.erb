@@ -11,7 +11,7 @@
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
       <% if user_signed_in? && current_user.is_doctor == false %>
       <h3 class="gray-900">Welcome back, <%= current_user.first_name.capitalize %><br>
-        <%= @last_result.next_test_date ? "Your next test is due on #{@last_result.next_test_date.strftime("%d %b %Y")}" : "When were you last checked?"%>
+        <%= !@last_result.nil? ? "Your next test is due on #{@last_result.strftime("%d %b %Y")}" : "When were you last checked?"%>
       </h3>
       <% elsif user_signed_in? && current_user.is_doctor == true %>
       <h3 class="gray-900">Welcome back, Dr. <%= current_user.first_name.capitalize %>
