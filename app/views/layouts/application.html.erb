@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <%= google_tag_manager_script_tag(:snuffd) %>
   <title><%= meta_title %></title>
   <meta name="description" content="<%= meta_description %>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,11 +21,12 @@
   <%= favicon_link_tag asset_path('snuffd_favicon.png') %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.compat.css" />
   <script src="https://kit.fontawesome.com/5678bf38de.js" data-mutate-approach="sync"></script>
 </head>
 
 <body>
+  <%= google_tag_manager_noscript_tag(:snuffd) %>
   <%= render "shared/navbar" %>
   <%= render "shared/flashes" %>
 
