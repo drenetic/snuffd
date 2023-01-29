@@ -55,7 +55,7 @@
         <%= icon('fa-duotone', 'link')%> My Shared Links
         <% end %>
 
-        <%= link_to secure_token_path, class: "nav-link text-nowrap", data: { turbo_frame: "remote_modal" } do %>
+        <%= link_to secure_token_path, class: "nav-link text-nowrap", data: { turbo_frame: "remote_modal"} do %>
         <%= icon('fa-duotone', 'shield-keyhole')%> Generate Token
         <% end %>
 
@@ -96,7 +96,7 @@
 
       <div class="nav-item mx-2">
         <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" do %>
-        <%= icon('fa-duotone', 'door-open')%> Logout
+        <%= icon('fa-duotone', 'door-open', class: "me-1")%> Logout
         <% end %>
 
 
@@ -104,11 +104,17 @@
     </div>
 
     <% else %>
-    <div class="nav-item">
-      <%= link_to "Get Snuffd", new_user_registration_path, class: "nav-link" %>
+
+    <div class="nav-item me-2">
+        <%= link_to new_user_registration_path, class: "nav-link btn btn-outline-secondary" do %>
+        <%= icon('fa-duotone', 'fire-flame', class: "me-1")%> Get Snuffd
+        <% end %>
     </div>
+
     <div class="nav-item">
-      <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <%= link_to new_user_session_path, class: "nav-link btn btn-outline-secondary" do %>
+        <%= icon('fa-duotone', 'lock-keyhole', class: "me-1")%> Login
+        <% end %>
     </div>
 
     <% end %>
