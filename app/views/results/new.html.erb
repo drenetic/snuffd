@@ -55,14 +55,15 @@
           <legend class="col-sm-4 col-md-4 col-lg-2 col-form-label text-nowrap">Infection Status</legend>
           <div class="col-sm-8 col-md-6 col-lg-4">
             <div class="form-check">
-              <%= radio_button_tag("status[]", "positive #{infection.id}") %>
-              <label class="form-check-label" for="">
+              <%= check_box_tag("status[]", "positive #{infection.id}") %>
+          <label class="form-check-label" for="">
                 Detected
               </label>
             </div>
             <div class="form-check border-2 pb-2 border-bottom border-lightgray">
-              <%= radio_button_tag("status[]", "negative #{infection.id}" ) %>
-              <label class="form-check-label" for="">
+              <%= check_box_tag("status[]", "negative #{infection.id}") %>
+          <label class="form-check-label" for="">
+
                 Not Detected
               </label>
             </div>
@@ -73,13 +74,13 @@
           <legend class="col-sm-4 col-md-4 col-lg-2 col-form-label text-nowrap">Treatment Status</legend>
           <div class="col-sm-8 col-md-6 col-lg-4">
             <div class="form-check">
-              <%= radio_button_tag("is_treated[]", "true #{infection.id}") %>
+              <%= check_box_tag("is_treated[]", "true #{infection.id}") %>
               <label class="form-check-label" for="">
                 Yes, prescription issued
               </label>
             </div>
             <div class="form-check">
-              <%= radio_button_tag("is_treated[]", "false #{infection.id}") %>
+              <%= check_box_tag("is_treated[]", "false #{infection.id}") %>
               <label class="form-check-label" for="">
                 Not applicable
               </label>
