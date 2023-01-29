@@ -8,7 +8,7 @@
   <div class="card mb-3 p-3">
     <div class="mb-3">
       <div class="row justify-content-center">
-        <div class="col-5">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
@@ -16,7 +16,7 @@
                       class: "form-control me-3"
           %>
         </div>
-        <div class="col-5">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :last_name,
                       required: true,
                       autofocus: true,
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-4">
+        <div class="col-sm-4 col-md-5 col-lg-4 text-nowrap">
           <%= f.input :nickname,
                       label: "Username",
                       required: true,
@@ -34,7 +34,7 @@
                       class: "form-control"
           %>
         </div>
-        <div class="col-6">
+        <div class="col-sm-4 col-md-5 col-lg-6 text-nowrap">
           <%= f.input :email,
                       required: true,
                       autofocus: true,
@@ -43,17 +43,17 @@
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-5">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :password,
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
         </div>
-        <div class="col-5">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :password_confirmation,
                       required: true,
                       input_html: { autocomplete: "new-password" },
-                      label: "Confirm Password"
+                      label: "Confirm"
           %>
         </div>
       </div>
@@ -62,8 +62,8 @@
 
   <div class="card mb-3 p-3">
     <div class="mb-3">
-      <div class="row justify-content-center">
-        <div class="col-4">
+      <div class="row row-cols-1 row-cols-lg-5 g-2 g-lg-3 mb-1 mt-1 justify-content-center">
+        <div class="col-sm-4 col-md-5 col-lg-5">
           <%= f.input :date_of_birth,
                       as: :date,
                       required: true,
@@ -71,9 +71,14 @@
                       html5: true,
                       label: "Date of Birth"
           %>
-
         </div>
-        <div class="col-2">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
+          <%= f.input :location,
+                      as: :select, collection: ["NSW", "VIC", "QLD", "SA", "WA", "NT"],
+                      label: "State"
+          %>
+        </div>
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :gender,
                       as: :select, collection: ["Man",
                                                 "Cis Man",
@@ -89,7 +94,7 @@
                                                 hint: ""
           %>
         </div>
-        <div class="col-2">
+        <div class="col-sm-4 col-md-5 col-lg-5 text-nowrap">
           <%= f.input :orientation,
                       as: :select, collection: ["Straight (heterosexual)",
                                                 "Gay",
@@ -102,47 +107,41 @@
                                                 label: "Orientation"
           %>
         </div>
-        <div class="col-2">
-          <%= f.input :location,
-                      as: :select, collection: ["NSW", "VIC", "QLD", "SA", "WA", "NT"],
-                      label: "State"
-          %>
-        </div>
       </div>
     </div>
   </div>
 
   <div data-controller="showhide">
     <div class="card mb-3 p-3">
-      <div class="row mb-0">
-        <label for="" class="col-sm-2 col-form-label text-nowrap"><strong>Doctor Profile</strong></label>
-        <div class="col-sm-10">
-          <div class="form-check form-switch text-nowrap">
-            <%= f.input :is_doctor,
+      <div class="row row-cols-2 g-2 g-lg-3 mb-1 mt-1 justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-2 col-form-label text-nowrap"><strong>Health Professional?</strong></div>
+      <div class="col-sm-1 col-md-6 col-lg-8 col-form-label text-nowrap">
+        <div class="form-check form-switch text-nowrap">
+          <%= f.input :is_doctor,
                       input_html: { type: "checkbox",
                       data: { showhide_target: "input", action: "change->showhide#toggle" } },
-                      label: "Add provider number",
+                      label: false,
                       as: :boolean,
                       class: "form-check-input"
           %>
-            <label class="form-check-label" for="<% f.input :is_doctor%>"></label>
           </div>
         </div>
       </div>
 
       <div data-showhide-target="output" hidden="">
         <div class="mt-1">
-          <div class="row justify-content-center">
-            <div class="col-10">
+          <div class="row row-cols-1 row-cols-lg-5 g-2 g-lg-3 mb-1 mt-1 justify-content-center">
+            <div class="col-sm-8 col-lg-10 text-nowrap">
               <%= f.input :provider_number,
-                        class: "mt-2"
+                        class: "mt-2",
+                        label: "Provider Number"
             %>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <%= f.button :submit, "Register", class: "btn btn-primary" %>
+    <%= f.button :submit, "Register", class: "btn btn-primary mb-5" %>
   </div>
   <% end %>
 </div>

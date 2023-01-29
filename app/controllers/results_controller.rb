@@ -94,7 +94,7 @@ class ResultsController < ApplicationController
       patient = User.find(@result.user_id)
       redirect_to results_patient_path(patient)
       else
-        redirect_to result_path
+        redirect_to results_path
       end
     else
       render 'errors/access_denied'

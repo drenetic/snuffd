@@ -94,9 +94,9 @@
       </div>
 
 
-      <div class="nav-item mx-2">
+      <div class="nav-item mx-1 p-1">
         <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" do %>
-        <%= icon('fa-duotone', 'door-open', class: "me-1")%> Logout
+        <%= icon('fa-duotone', 'door-open', class: "")%> Logout
         <% end %>
 
 
@@ -105,15 +105,15 @@
 
     <% else %>
 
-    <div class="nav-item me-2">
-        <%= link_to new_user_registration_path, class: "nav-link btn btn-outline-secondary" do %>
-        <%= icon('fa-duotone', 'fire-flame', class: "me-1")%> Get Snuffd
+    <div class="nav-item mx-1 p-1">
+        <%= link_to new_user_registration_path, class: " btn btn-outline-secondary" do %>
+        <%= icon('fa-duotone', 'fire-flame', class: "")%> Get Snuffd
         <% end %>
     </div>
 
-    <div class="nav-item">
-        <%= link_to new_user_session_path, class: "nav-link btn btn-outline-secondary" do %>
-        <%= icon('fa-duotone', 'lock-keyhole', class: "me-1")%> Login
+    <div class="nav-item mx-1 p-1">
+        <%= link_to new_user_session_path, class: "btn btn-outline-secondary" do %>
+        <%= icon('fa-duotone', 'lock-keyhole', class: "")%> Login
         <% end %>
     </div>
 
