@@ -54,9 +54,9 @@ source "https://token:135D925A-918B-48B0-B67A-F41E0059C84B@dl.fontawesome.com/ba
   gem "font-awesome-pro-sass", "6.2.1"
 end
 gem "simple_form", github: "heartcombo/simple_form"
-gem "cloudinary"
 gem "faker"
-gem 'turbolinks', '~> 5.2.0'
+gem "turbolinks", "~> 5.2.0"
+gem "gtm_rails"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
