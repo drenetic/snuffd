@@ -88,10 +88,14 @@ class ResultsController < ApplicationController
 
   def destroy
     @result = Result.find(params[:id])
-    if current_user == @result.doctor
+    if current_user == @result.user || @result.doctor
       @result.destroy
+      if current_user == @result.doctor
       patient = User.find(@result.user_id)
       redirect_to results_patient_path(patient)
+      else
+        redirect_to result_path
+      end
     else
       render 'errors/access_denied'
     end

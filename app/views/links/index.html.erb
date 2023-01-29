@@ -1,5 +1,12 @@
-<h1><%= @links.empty? ? "You've got no active links" : "Your active links" %></h1>
-<p><%= @links.empty? ? "Go to a result to generate a shareable link" : "" %></p>
+<h2>My Shared Links</h2>
+<h5 class="mt-5">
+<% if @links.empty? %>
+  <%= icon('fa-duotone', 'folder-open') %> You have no shared result links active </h5>
+  <% else %>
+  Active linkk </h5>
+  <% end %>
+
+<h6 class="text-muted mt-3 mb-5"><%= @links.empty? ? "To generate a shareable link, view an active test result and select 'Share Result'." : "" %></h6>
 
 <div class="d-flex flex-wrap">
 <div class="card w-75">
