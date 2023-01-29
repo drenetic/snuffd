@@ -1,19 +1,44 @@
 <% if current_user.is_doctor %>
 
-<input type="text" id="search-input" placeholder="Patient Search.." class="mb-3">
-<div id="patient-list">
-  <% @patients.each do |patient| %>
-  <p>
-    <i class="fa-duotone fa-folder-medical"></i>
-    <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
-  </p>
-  <% end %>
+<h2>Patient Search</h2>
+
+<div class="card mt-5 mb-2 pt-3">
+  <div class="mb-3">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <input type="text" id="search-input" placeholder="Begin typing..." class="form-control">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-3 mb-0 pt-3">
+  <div class="mb-1">
+    <div class="row justify-content-center">
+      <div class="col-10">
+        <div id="patient-list">
+          <% if @patients.present? %>
+            <% @patients.each do |patient| %>
+            <p>
+              <i class="fa-duotone fa-folder-medical"></i>
+              <%= link_to "#{patient.first_name} #{patient.last_name}", results_patient_path(patient) %>
+            </p>
+            <% end %>
+          <% else %>
+            <h5 class="pt-2"><%= icon('fa-duotone', 'folder-open') %> You have no patients associated with your account</h5>
+            <h6 class="text-muted pb-2">As you generate more results, your patients will be searchable here.</h6>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% else %>
 
 <h2>My Results</h2>
 
+<% if @results.present? %>
 <div class="mt-5 mb-3">
   <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-4">
     <% @results.order("id desc, test_date desc").each do |result| %>
@@ -21,26 +46,9 @@
     <% end %>
   </div>
 </div>
-
+<% else %>
+<h5 class="mt-5"><%= icon('fa-duotone', 'folder-open') %> You have no test results linked to your profile</h5>
+<h6 class="text-muted mt-3">Ask your health professional to load your results on your next visit.</h6>
 <% end %>
 
-
-<script>
-  var searchInput = document.getElementById("search-input");
-  var list = document.getElementById("patient-list");
-
-  searchInput.addEventListener("keyup", function () {
-    var searchValue = this.value.toLowerCase();
-    var listItems = list.getElementsByTagName("p");
-
-    for (var i = 0; i < listItems.length; i++) {
-      var item = listItems[i];
-      var itemValue = item.innerHTML.toLowerCase();
-      if (itemValue.indexOf(searchValue) != -1) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
-    }
-  });
-</script>
+<% end %>

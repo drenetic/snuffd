@@ -5,6 +5,7 @@ export default class extends Controller {
   connect() {
     this.modal = new Modal(this.element)
     this.modal.show()
+    this.element[this.modal] = this
   }
 
   hideBeforeRender(event) {
@@ -17,5 +18,9 @@ export default class extends Controller {
 
   isOpen() {
     return this.element.classList.contains("show")
+  }
+
+  disconnect() {
+    this.modal.dispose()
   }
 }
