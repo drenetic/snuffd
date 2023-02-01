@@ -46,7 +46,7 @@
 
         </div>
         <div class="modal-footer">
-          <%= button_to root_path, class: "btn btn-secondary", form: { "data-bs-dismiss" => "modal" } do %>
+          <%= button_to root_path, class: "btn btn-secondary", form: { "data-bs-dismiss" => "modal" }, "data-turbo": "true" do %>
           <%= icon('fa-duotone', 'xmark') %> Close
           <% end %>
         </div>

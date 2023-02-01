@@ -47,7 +47,7 @@
 
         <% else %>
 
-        <%= link_to results_path, class: "nav-link text-nowrap" do %>
+        <%= link_to results_path, class: "nav-link text-nowrap", "data-turbo": "true" do %>
         <%= icon('fa-duotone', 'cards-blank')%> My Results
         <% end %>
 

@@ -12,13 +12,13 @@
       <% if user_signed_in? && current_user.is_doctor == false %>
       <span>
         <h3 class="mb-2">Welcome back, <%= current_user.first_name.capitalize %></h3>
-        <h3 class="text-muted">
+        <h4 class="text-muted">
           <%= !@last_result.nil? ? "Your next test is due on #{@last_result.strftime("%d %b %Y")}" : "When were you last checked?"%>
-        </h3>
+        </h4>
       </span>
       <% elsif user_signed_in? && current_user.is_doctor == true %>
-      <h3 class="">Welcome back, Dr. <%= current_user.first_name.capitalize %>
-        <%= current_user.last_name.capitalize %></h3>
+      <h4 class="">Welcome back, Dr. <%= current_user.first_name.capitalize %>
+        <%= current_user.last_name.capitalize %></h4>
       <% else %>
       <%= link_to new_user_registration_path, class: "btn btn-primary btn-lg px-4 mt-sm-2 mb-sm-2 border-radius-375 transition duration-300 ease-in-out transform hover:scale-105 gradient-background gradient-background:hover" do %>
       Join now
@@ -31,7 +31,7 @@
     <%# Card 2 %>
     <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
       <i class="display-1 fa-duotone fa-house-medical red-500 mb-3"></i>
-      <h3 class="fw-bold">Doctor-approved</h2>
+      <h5 class="fw-bold">Doctor-approved</h5>
         <p class="gray-800">
           Trusted by health professionals.<br>
           Feel confident in the accuracy and reliability in the results.
@@ -40,7 +40,7 @@
 
     <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
       <i class="display-1 fa-sharp fa-duotone fa-hand-holding-hand orange-500 mb-3"></i>
-      <h3 class="fw-bold">Shareable</h2>
+      <h5 class="fw-bold">Shareable</h5>
         <p class="gray-800">
           Get in the sheets with peeps.<br> Securely share your results and make the awkward awesome.
         </p>
@@ -49,7 +49,7 @@
     <%# Card 1 %>
     <div class="col-12 col-sm-12 col-md-3 card border-radius-375 p-3 m-4">
       <i class="display-1 card-title fa-duotone fa-peach red-500 mb-3"></i>
-      <h3 class="fw-bold">Peace of mind</h2>
+      <h5 class="fw-bold">Peace of mind</h5>
         <p class="gray-800">
           Track your sexual health easily.<br>
           Get test results uploaded by doctors, all in one place.
